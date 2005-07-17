@@ -1,0 +1,255 @@
+Index: e-smith-imp/e-smith-imp.spec
+diff -u e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/10server:1.1 e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/10server:removed
+--- e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/10server:1.1	Tue Jun 14 10:37:41 2005
++++ e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/10server	Wed Dec 31 19:00:00 1969
+@@ -1,7 +0,0 @@
+-$prefGroups['server'] = array(
+-    'column' => _("General Options"),
+-    'label' => _("Server and Folder Information"),
+-    'desc' => _("Change mail server and folder settings."),
+-    'members' => array('subscribe', 'folderselect', 'trashselect', 'spamselect')
+-);
+-
+Index: e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/15acl
+diff -u e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/15acl:1.1 e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/15acl:removed
+--- e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/15acl:1.1	Tue Jun 14 10:37:42 2005
++++ e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/15acl	Wed Dec 31 19:00:00 1969
+@@ -1,9 +0,0 @@
+-if (!empty($_SESSION['imp']['acl'])) \{
+-    $prefGroups['acl'] = array(
+-        'column' => _("General Options"),
+-        'label' => _("Share Folders"),
+-        'desc' => _("Share your mail folders with other users."),
+-        'url' => 'acl.php'
+-    );
+-\}
+-
+Index: e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/20logintasks
+diff -u e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/20logintasks:1.1 e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/20logintasks:removed
+--- e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/20logintasks:1.1	Tue Jun 14 10:37:42 2005
++++ e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/20logintasks	Wed Dec 31 19:00:00 1969
+@@ -1,11 +0,0 @@
+-$prefGroups['logintasks'] = array(
+-    'column' => _("General Options"),
+-    'label' => _("Login Tasks"),
+-    'desc' => sprintf(_("Customize tasks to run upon logon to %s."), $GLOBALS['registry']->get('name')),
+-    'members' => array('initialpageselect', 'rename_sentmail_monthly',
+-                       'delete_sentmail_monthly',
+-                       'delete_sentmail_monthly_keep', 'delete_attachments_monthly',
+-                       'delete_attachments_monthly_keep', 'purge_trash',
+-                       'purge_trash_interval', 'purge_trash_keep')
+-);
+-
+Index: e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/25compose
+diff -u e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/25compose:1.1 e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/25compose:removed
+--- e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/25compose:1.1	Tue Jun 14 10:37:42 2005
++++ e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/25compose	Wed Dec 31 19:00:00 1969
+@@ -1,12 +0,0 @@
+-$prefGroups['compose'] = array(
+-    'column' => _("Message Options"),
+-    'label' => _("Message Composition"),
+-    'desc' => _("Customize how you send mail."),
+-    'members' => array('mail_domain', 'compose_popup', 'wrap_width',
+-                       'compose_html', 'compose_spellcheck', 'num_words',
+-                       'compose_confirm', 'reply_quote', 'reply_headers',
+-                       'attrib_text', 'folderselect', 'close_draft',
+-                       'unseen_drafts', 'set_priority', 'sending_charset',
+-                       'encryptselect', 'save_attachments')
+-);
+-
+Index: e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/30allow_receipts
+diff -u e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/30allow_receipts:1.1 e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/30allow_receipts:removed
+--- e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/30allow_receipts:1.1	Tue Jun 14 10:37:43 2005
++++ e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/30allow_receipts	Wed Dec 31 19:00:00 1969
+@@ -1,3 +0,0 @@
+-if (!empty($GLOBALS['conf']['compose']['allow_receipts'])) \{
+-    $prefGroups['compose']['members'] = array_merge($prefGroups['compose']['members'], array('disposition_request_read', 'disposition_request_delivery'));
+-\}
+Index: e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/35use_maillog
+diff -u e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/35use_maillog:1.1 e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/35use_maillog:removed
+--- e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/35use_maillog:1.1	Tue Jun 14 10:37:43 2005
++++ e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/35use_maillog	Wed Dec 31 19:00:00 1969
+@@ -1,4 +0,0 @@
+-if (!empty($GLOBALS['conf']['maillog']['use_maillog'])) \{
+-    $prefGroups['compose']['members'] = array_merge($prefGroups['compose']['members'], array('disposition_send_mdn'));
+-\}
+-
+Index: e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/40viewing
+diff -u e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/40viewing:1.1 e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/40viewing:removed
+--- e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/40viewing:1.1	Tue Jun 14 10:37:43 2005
++++ e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/40viewing	Wed Dec 31 19:00:00 1969
+@@ -1,10 +0,0 @@
+-$prefGroups['viewing'] = array(
+-    'column' => _("Message Options"),
+-    'label' => _("Message Viewing"),
+-    'desc' => _("Configure how messages are displayed."),
+-    'members' => array('filtering', 'strip_attachments',
+-                       'html_image_replacement', 'html_image_addrbook',
+-                       'highlight_text', 'highlight_simple_markup', 'show_quoteblocks',
+-                       'dim_signature', 'emoticons', 'attachment_display')
+-);
+-
+Index: e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/45delmove
+diff -u e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/45delmove:1.1 e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/45delmove:removed
+--- e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/45delmove:1.1	Tue Jun 14 10:37:43 2005
++++ e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/45delmove	Wed Dec 31 19:00:00 1969
+@@ -1,8 +0,0 @@
+-$prefGroups['delmove'] = array(
+-    'column' => _("Message Options"),
+-    'label' => _("Deleting and Moving Messages"),
+-    'desc' => _("Set preferences for what happens when you move and delete messages."),
+-    'members' => array('mailbox_return', 'delete_spam_after_report',
+-                       'use_trash', 'trashselect', 'empty_trash_menu')
+-);
+-
+Index: e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/50newmail
+diff -u e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/50newmail:1.1 e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/50newmail:removed
+--- e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/50newmail:1.1	Tue Jun 14 10:37:44 2005
++++ e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/50newmail	Wed Dec 31 19:00:00 1969
+@@ -1,7 +0,0 @@
+-$prefGroups['newmail'] = array(
+-    'column' => _("Message Options"),
+-    'label' => _("New Mail"),
+-    'desc' => _("Control when new mail will be checked for, and whether or not to notify you when it arrives."),
+-    'members' => array('refresh_time', 'nav_popup')
+-);
+-
+Index: e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/55show_preview
+diff -u e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/55show_preview:1.1 e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/55show_preview:removed
+--- e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/55show_preview:1.1	Tue Jun 14 10:37:44 2005
++++ e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/55show_preview	Wed Dec 31 19:00:00 1969
+@@ -1,9 +0,0 @@
+-if (!empty($GLOBALS['conf']['mailbox']['show_preview'])) \{
+-    $prefGroups['mailpreview'] = array(
+-        'column' => _("Message Options"),
+-        'label' => _("Mail Previews"),
+-        'desc' => _("Configure mail preview options."),
+-        'members' => array('preview_enabled', 'preview_maxlen', 'preview_strip_nl', 'preview_show_unread', 'preview_show_tooltip')
+-    );
+-\}
+-
+Index: e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/5identities
+diff -u e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/5identities:1.1 e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/5identities:removed
+--- e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/5identities:1.1	Tue Jun 14 10:37:44 2005
++++ e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/5identities	Wed Dec 31 19:00:00 1969
+@@ -1,9 +0,0 @@
+-$prefGroups['identities'] = array(
+-    'column' => _("General Options"),
+-    'label' => _("Personal Information"),
+-    'desc' => _("Change the name, address, and signature that people see when they read and reply to your email."),
+-    'members' => array('replyto_addr', 'alias_addr', 'tieto_addr', 'bcc_addr',
+-                       'mail_hdr', 'signature', 'sig_dashes', 'sig_first',
+-                       'save_sent_mail', 'sent_mail_folder', 'sentmailselect')
+-);
+-
+Index: e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/60fetchmail
+diff -u e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/60fetchmail:1.1 e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/60fetchmail:removed
+--- e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/60fetchmail:1.1	Tue Jun 14 10:37:45 2005
++++ e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/60fetchmail	Wed Dec 31 19:00:00 1969
+@@ -1,7 +0,0 @@
+-$prefGroups['fetchmail'] = array(
+-    'column' => _("Message Options"),
+-    'label' => _("Fetch Mail"),
+-    'desc' => _("Customize accounts for fetching mail from other accounts."),
+-    'members' => array('fetchmail_link', 'fetchmail_popup', 'fetchmail_menu')
+-);
+-
+Index: e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/65display
+diff -u e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/65display:1.1 e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/65display:removed
+--- e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/65display:1.1	Tue Jun 14 10:37:45 2005
++++ e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/65display	Wed Dec 31 19:00:00 1969
+@@ -1,9 +0,0 @@
+-$prefGroups['display'] = array(
+-    'column' => _("Other Options"),
+-    'label' => _("Mailbox and Folder Display Options"),
+-    'desc' => _("Change display options such as how many messages you see on each page and how messages are sorted."),
+-    'members' => array('mailbox_start', 'sortby', 'sortdir', 'max_msgs',
+-                       'from_link', 'time_format', 'nav_expanded',
+-                       'show_legend')
+-);
+-
+Index: e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/70filters
+diff -u e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/70filters:1.1 e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/70filters:removed
+--- e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/70filters:1.1	Tue Jun 14 10:37:45 2005
++++ e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/70filters	Wed Dec 31 19:00:00 1969
+@@ -1,7 +0,0 @@
+-$prefGroups['filters'] = array(
+-    'column' => _("Other Options"),
+-    'label' => _("Filters"),
+-    'desc' => _("Create filtering rules to organize your incoming mail, sort it into folders, and delete spam."),
+-    'url' => 'filterprefs.php'
+-);
+-
+Index: e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/75addressbooks
+diff -u e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/75addressbooks:1.1 e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/75addressbooks:removed
+--- e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/75addressbooks:1.1	Tue Jun 14 10:37:45 2005
++++ e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/75addressbooks	Wed Dec 31 19:00:00 1969
+@@ -1,7 +0,0 @@
+-$prefGroups['addressbooks'] = array(
+-    'column' => _("Other Options"),
+-    'label' => _("Address Books"),
+-    'desc' => _("Select address book sources for adding and searching for addresses."),
+-    'members' => array('auto_expand', 'save_recipients', 'display_contact', 'sourceselect')
+-);
+-
+Index: e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/80gnupg
+diff -u e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/80gnupg:1.1 e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/80gnupg:removed
+--- e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/80gnupg:1.1	Tue Jun 14 10:37:45 2005
++++ e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/80gnupg	Wed Dec 31 19:00:00 1969
+@@ -1,9 +0,0 @@
+-if (isset($GLOBALS['conf']['utils']['gnupg'])) \{
+-    $prefGroups['pgp'] = array(
+-        'column' => _("Other Options"),
+-        'label' => _("PGP Options"),
+-        'desc' => sprintf(_("Control PGP support for %s."), $GLOBALS['registry']->get('name')),
+-        'url' => 'pgp.php'
+-    );
+-\}
+-
+Index: e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/85smime
+diff -u e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/85smime:1.1 e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/85smime:removed
+--- e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/85smime:1.1	Tue Jun 14 10:37:45 2005
++++ e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/85smime	Wed Dec 31 19:00:00 1969
+@@ -1,9 +0,0 @@
+-if (extension_loaded('openssl') and isset($GLOBALS['conf']['utils']['openssl_cafile'])) \{
+-    $prefGroups['smime'] = array(
+-        'column' => _("Other Options"),
+-        'label' => _("S/MIME Options"),
+-        'desc' => sprintf(_("Control S/MIME support for %s."), $GLOBALS['registry']->get('name')),
+-        'url' => 'smime.php'
+-    );
+-\}
+-
+Index: e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/90replyto_addr
+diff -u e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/90replyto_addr:1.1 e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/90replyto_addr:removed
+--- e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/90replyto_addr:1.1	Tue Jun 14 10:37:45 2005
++++ e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/90replyto_addr	Wed Dec 31 19:00:00 1969
+@@ -1,8 +0,0 @@
+-// user preferred email address for Reply-To:, if different from From:
+-$_prefs['replyto_addr'] = array(
+-    'value' => '',
+-    'locked' => false,
+-    'shared' => false,
+-    'type' => 'text',
+-    'desc' => _("Your Reply-to: address: <i>(optional)</i>"));
+-
+Index: e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/95alias_addr
+diff -u e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/95alias_addr:1.1 e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/95alias_addr:removed
+--- e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/95alias_addr:1.1	Tue Jun 14 10:37:45 2005
++++ e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/95alias_addr	Wed Dec 31 19:00:00 1969
+@@ -1,8 +0,0 @@
+-// user preferred alias addresses
+-$_prefs['alias_addr'] = array(
+-    'value' => '',
+-    'locked' => false,
+-    'shared' => false,
+-    'type' => 'textarea',
+-    'desc' => _("Your alias addresses: <i>(optional, enter each address on a new line)</i>"));
+-
+Index: e-smith-imp/root/etc/e-smith/templates.metadata/home/httpd/html/horde/imp/config/prefs.php
+diff -u /dev/null e-smith-imp/root/etc/e-smith/templates.metadata/home/httpd/html/horde/imp/config/prefs.php:1.3
+--- /dev/null	Tue Jun 14 13:18:55 2005
++++ e-smith-imp/root/etc/e-smith/templates.metadata/home/httpd/html/horde/imp/config/prefs.php	Tue Jun 14 13:18:21 2005
+@@ -0,0 +1,2 @@
++GID="www"
++PERMS=0640

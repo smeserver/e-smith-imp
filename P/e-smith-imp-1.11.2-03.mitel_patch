@@ -1,0 +1,50 @@
+Index: e-smith-imp/e-smith-imp.spec
+diff -u e-smith-imp/root/etc/e-smith/db/accounts/defaults/webmail/Comment:1.1 e-smith-imp/root/etc/e-smith/db/accounts/defaults/webmail/Comment:removed
+--- e-smith-imp/root/etc/e-smith/db/accounts/defaults/webmail/Comment:1.1	Mon Jan 17 11:41:23 2005
++++ e-smith-imp/root/etc/e-smith/db/accounts/defaults/webmail/Comment	Wed Dec 31 19:00:00 1969
+@@ -1 +0,0 @@
+-placeholder for webmail URL
+Index: e-smith-imp/root/etc/e-smith/db/accounts/defaults/webmail/type
+diff -u e-smith-imp/root/etc/e-smith/db/accounts/defaults/webmail/type:1.1 e-smith-imp/root/etc/e-smith/db/accounts/defaults/webmail/type:removed
+--- e-smith-imp/root/etc/e-smith/db/accounts/defaults/webmail/type:1.1	Mon Jan 17 11:41:23 2005
++++ e-smith-imp/root/etc/e-smith/db/accounts/defaults/webmail/type	Wed Dec 31 19:00:00 1969
+@@ -1 +0,0 @@
+-url
+Index: e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/servers.php/120IMAPServers
+diff -u e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/servers.php/120IMAPServers:1.4 e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/servers.php/120IMAPServers:1.5
+--- e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/servers.php/120IMAPServers:1.4	Fri Mar 28 11:12:07 2003
++++ e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/servers.php/120IMAPServers	Tue Jun  7 10:58:06 2005
+@@ -1,13 +1,21 @@
+-$servers['imap'] = array(
+-    'name' => 'IMAP Server',
+-    'server' => 'localhost',
+-    'protocol' => 'imap/notls',
+-    'port' => '143',
+-    'folders' => '',
+-    'namespace' => '',
+-    'maildomain' => '{ $DomainName }',
+-    'smtphost' => 'mail.{ $DomainName }',
+-    'realm' => '{ $DomainName }',
+-    'preferred' => ''
+-);
++{
++    use esmith::DomainsDB;
++    my $db = esmith::DomainsDB->open_ro;
++    foreach my $domain ($db->get_all())
++    {
++	$domain = $domain->key;
+ 
++	$OUT .= "\$servers[$domain] = array(\n";
++	$OUT .= "    'name' => 'IMAP Server',\n";
++	$OUT .= "    'server' => 'localhost',\n";
++	$OUT .= "    'protocol' => 'imap/notls',\n";
++	$OUT .= "    'port' => '143',\n";
++	$OUT .= "    'folders' => '',\n";
++	$OUT .= "    'namespace' => '',\n";
++	$OUT .= "    'maildomain' => '$domain',\n";
++	$OUT .= "    'smtphost' => 'localhost',\n";
++	$OUT .= "    'realm' => '$domain',\n";
++	$OUT .= "    'preferred' => ''\n";
++	$OUT .= ");\n";
++    }
++}

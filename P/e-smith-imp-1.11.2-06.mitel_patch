@@ -1,0 +1,13 @@
+Index: e-smith-imp/e-smith-imp.spec
+diff -u e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/servers.php/120IMAPServers:1.5 e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/servers.php/120IMAPServers:1.6
+--- e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/servers.php/120IMAPServers:1.5	Tue Jun  7 10:58:06 2005
++++ e-smith-imp/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/servers.php/120IMAPServers	Fri Jun 24 11:00:32 2005
+@@ -5,7 +5,7 @@
+     {
+ 	$domain = $domain->key;
+ 
+-	$OUT .= "\$servers[$domain] = array(\n";
++	$OUT .= "\$servers['$domain'] = array(\n";
+ 	$OUT .= "    'name' => 'IMAP Server',\n";
+ 	$OUT .= "    'server' => 'localhost',\n";
+ 	$OUT .= "    'protocol' => 'imap/notls',\n";
