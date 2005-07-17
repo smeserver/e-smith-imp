@@ -1,0 +1,52 @@
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-1.11.2/root/etc/e-smith/templates/etc/httpd/conf/httpd.conf/VirtualHosts/30WebmailAliases mezzanine_patched_e-smith-imp-1.11.2/root/etc/e-smith/templates/etc/httpd/conf/httpd.conf/VirtualHosts/30WebmailAliases
+--- e-smith-imp-1.11.2/root/etc/e-smith/templates/etc/httpd/conf/httpd.conf/VirtualHosts/30WebmailAliases	2005-01-17 09:30:00.000000000 -0700
++++ mezzanine_patched_e-smith-imp-1.11.2/root/etc/e-smith/templates/etc/httpd/conf/httpd.conf/VirtualHosts/30WebmailAliases	2005-07-17 14:34:49.091614984 -0600
+@@ -1,33 +1,24 @@
+ {
+     # vim: ft=perl:
+-    my $webmailStatus = $imp{'status'} || "disabled";
+-
+-    return "    # webmail is disabled in this VirtualHost" 
+-    unless $webmailStatus eq 'enabled';
+ 
+-    my $webmailAccessType = $imp{'access'} || "SSL";	
+-
+-    my $hordedir = '/home/httpd/html/horde';
+-    my $impdir = "$hordedir/imp";
++    $haveSSL = (exists ${modSSL}{status} and ${modSSL}{status} eq "enabled") ?  'yes' : 'no';
++    my $webmailStatus = $imp{'status'} || "disabled";
++    my $webmailAccessType = $imp{'access'} || "SSL";
+ 
+-    if ($webmailAccessType eq 'SSL' && $port ne "443")
+-    {
+-    $OUT .= <<'HERE';
+-    RewriteRule ^/webmail   https://%{HTTP_HOST}/webmail [L,R]
+-HERE
+-    }
+-    else
+-    {
+-        $OUT .= "    Alias       /webmail $impdir\n";
+-    }
++    my $dirs;
++    $dirs{horde} = '/home/httpd/html/horde';
++    $dirs{webmail} = "$dirs{horde}/imp";
+ 
+-    $OUT .= "    Alias       /horde $hordedir\n";
++    return "    # webmail is disabled in this VirtualHost"
++            unless $webmailStatus eq 'enabled';
+ 
+-    # prevent unencrypted "backdoor" access 
+-    if ($webmailAccessType eq 'SSL' && $port ne '443')
++    foreach $place ('webmail','horde')
+     {
+-        $OUT .= "\n    <Location ~ \"/horde//*\">\n";
+-        $OUT .= "    SSLRequireSSL on\n";
+-        $OUT .= "    </Location>\n";
++        if (($port eq "80") && ($haveSSL eq 'yes') && ($webmailAccessType eq 'SSL'))
++        {
++            $OUT .= "    RewriteRule ^/$place    https://%{HTTP_HOST}/$place [L,R]\n";
++        } else {
++            $OUT .= "    Alias       /$place   $dirs{$place}\n";
++        }
+     }
+ }
