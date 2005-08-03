@@ -2,7 +2,7 @@ Summary: e-smith specific IMP configuration and templates.
 %define name e-smith-imp
 Name: %{name}
 %define version 1.11.2
-%define release 06sme02
+%define release 07
 Version: %{version}
 Release: %{release}
 License: GPL
@@ -14,24 +14,21 @@ Patch1: e-smith-imp-1.11.2-03.mitel_patch
 Patch2: e-smith-imp-1.11.2-04.mitel_patch
 Patch3: e-smith-imp-1.11.2-05.mitel_patch
 Patch4: e-smith-imp-1.11.2-06.mitel_patch
-Patch5: e-smith-imp-1.11.2-rewrite.patch
-Patch6: e-smith-imp-1.11.2-rewrite.patch2
+Patch5: e-smith-imp-1.11.2-07.mitel_patch
 Packager: e-smith developers <bugs@e-smith.com>
 BuildRoot: /var/tmp/%{name}-%{version}-%{release}-buildroot
 BuildArchitectures: noarch
-Requires: imp-h3 >= 4.0, e-smith-base >= 4.15.1
+Requires: imp-h3 >= 4.0
+Requires: e-smith-base >= 4.15.1
 Requires: e-smith-apache >= 1.1.0-18
 Requires: e-smith-lib >= 1.15.1-16
 AutoReqProv: no
 Obsoletes: dcb-e-smith-imp
 
 %changelog
-* Thu Jul 28 2005 Shad L. Lords <slords@mail.com>
-- [1.11.2-06sme02]
-- Fix Rewrite rule to include trailing stuff
-
-- [1.11.2-06sme01]
-- Change requires to imp-h3
+* Tue Aug  2 2005 Shad Lords <slords@email.com>
+- [1.11.2-07]
+- Change requires from imp to imp-h3
 - Fix Rewrite rule and Proxy Pass to be cleaner
 
 * Fri Jun 24 2005 Charlie Brady <charlieb@e-smith.com>
@@ -419,7 +416,6 @@ so that IMP will work properly.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
-%patch6 -p1
 
 %build
 mkdir -p root/home/httpd/html/horde/imp/SSLonly
