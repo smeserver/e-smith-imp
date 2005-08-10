@@ -2,7 +2,7 @@ Summary: e-smith specific IMP configuration and templates.
 %define name e-smith-imp
 Name: %{name}
 %define version 1.11.2
-%define release 07
+%define release 08
 Version: %{version}
 Release: %{release}
 License: GPL
@@ -22,10 +22,23 @@ Requires: imp-h3 >= 4.0
 Requires: e-smith-base >= 4.15.1
 Requires: e-smith-apache >= 1.1.0-18
 Requires: e-smith-lib >= 1.15.1-16
+Requires: php
+Requires: php-pear
+Requires: pear-date
+Requires: pear-db
+Requires: pear-file
+Requires: pear-log
+Requires: pear-mail
+Requires: pear-mail_mime
 AutoReqProv: no
 Obsoletes: dcb-e-smith-imp
 
 %changelog
+* Tue Aug  9 2005 Charlie Brady <charlieb@e-smith.com>
+- [1.11.2-08]
+- Add Requires headers to ensure that all php and pear stuff is
+  pulled in on an upgrade.
+
 * Tue Aug  2 2005 Shad Lords <slords@email.com>
 - [1.11.2-07]
 - Change requires from imp to imp-h3
