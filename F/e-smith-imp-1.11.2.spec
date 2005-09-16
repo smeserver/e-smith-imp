@@ -2,7 +2,7 @@ Summary: e-smith specific IMP configuration and templates.
 %define name e-smith-imp
 Name: %{name}
 %define version 1.11.2
-%define release 08
+%define release 08sme01
 Version: %{version}
 Release: %{release}
 License: GPL
@@ -21,6 +21,7 @@ BuildArchitectures: noarch
 Requires: imp-h3 >= 4.0
 Requires: e-smith-base >= 4.15.1
 Requires: e-smith-apache >= 1.1.0-18
+Requires: e-smith-ingo
 Requires: e-smith-lib >= 1.15.1-16
 Requires: php
 Requires: php-pear
@@ -34,6 +35,10 @@ AutoReqProv: no
 Obsoletes: dcb-e-smith-imp
 
 %changelog
+*Fri Sep 16 2005 chris burnat <cburnat@burnat.com>
+- [1.11.2-08sme01]
+- Add Requires e-smith-ingo
+
 * Tue Aug  9 2005 Charlie Brady <charlieb@e-smith.com>
 - [1.11.2-08]
 - Add Requires headers to ensure that all php and pear stuff is
