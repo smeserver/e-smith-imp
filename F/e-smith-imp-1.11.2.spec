@@ -2,7 +2,7 @@ Summary: e-smith specific IMP configuration and templates.
 %define name e-smith-imp
 Name: %{name}
 %define version 1.11.2
-%define release 08sme01
+%define release 12
 Version: %{version}
 Release: %{release}
 License: GPL
@@ -21,10 +21,12 @@ BuildArchitectures: noarch
 Requires: imp-h3 >= 4.0
 Requires: e-smith-base >= 4.15.1
 Requires: e-smith-apache >= 1.1.0-18
-Requires: e-smith-ingo
 Requires: e-smith-lib >= 1.15.1-16
+Requires: e-smith-ingo
 Requires: php
 Requires: php-pear
+Requires: php-ldap
+Requires: php-mysql
 Requires: pear-date
 Requires: pear-db
 Requires: pear-file
@@ -35,9 +37,22 @@ AutoReqProv: no
 Obsoletes: dcb-e-smith-imp
 
 %changelog
-*Fri Sep 16 2005 chris burnat <cburnat@burnat.com>
-- [1.11.2-08sme01]
-- Add Requires e-smith-ingo
+* Tue Oct 25 2005 Charlie Brady <charlieb@e-smith.com>
+- [1.11.2-12]
+- Add missing Requires of php-ldap and php-mysql. [SF: 1337062]
+
+* Thu Sep 22 2005 Gordon Rowell <gordonr@e-smith.com>
+- [1.11.2-11]
+- Revert last change - the dependency should be in e-smith-horde,
+  which it is [SF: 1274096]
+
+* Thu Sep 22 2005 Gordon Rowell <gordonr@e-smith.com>
+- [1.11.2-10]
+- Add Requires wv for attachment viewing [SF: 1266925]
+
+* Mon Sep 19 2005 Charlie Brady <charlieb@e-smith.com>
+- [1.11.2-09]
+- Add Requires e-smith-ingo [SF: 1276898]
 
 * Tue Aug  9 2005 Charlie Brady <charlieb@e-smith.com>
 - [1.11.2-08]
