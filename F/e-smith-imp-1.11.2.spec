@@ -2,7 +2,7 @@ Summary: e-smith specific IMP configuration and templates.
 %define name e-smith-imp
 Name: %{name}
 %define version 1.11.2
-%define release 12
+%define release 13
 Version: %{version}
 Release: %{release}
 License: GPL
@@ -37,6 +37,9 @@ AutoReqProv: no
 Obsoletes: dcb-e-smith-imp
 
 %changelog
+* Wed Nov 30 2005 Gordon Rowell <gordonr@gormand.com.au> 1.11.2-13
+- Bump release number only
+
 * Tue Oct 25 2005 Charlie Brady <charlieb@e-smith.com>
 - [1.11.2-12]
 - Add missing Requires of php-ldap and php-mysql. [SF: 1337062]
