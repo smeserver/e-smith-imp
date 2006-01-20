@@ -15,6 +15,7 @@ Patch2: e-smith-imp-1.11.2-04.mitel_patch
 Patch3: e-smith-imp-1.11.2-05.mitel_patch
 Patch4: e-smith-imp-1.11.2-06.mitel_patch
 Patch5: e-smith-imp-1.11.2-07.mitel_patch
+Patch6: e-smith-imp-1.11.2-domains.patch
 Packager: e-smith developers <bugs@e-smith.com>
 BuildRoot: /var/tmp/%{name}-%{version}-%{release}-buildroot
 BuildArchitectures: noarch
