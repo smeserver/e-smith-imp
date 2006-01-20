@@ -2,7 +2,7 @@ Summary: e-smith specific IMP configuration and templates.
 %define name e-smith-imp
 Name: %{name}
 %define version 1.11.2
-%define release 13
+%define release 14
 Version: %{version}
 Release: %{release}
 License: GPL
@@ -37,6 +37,9 @@ AutoReqProv: no
 Obsoletes: dcb-e-smith-imp
 
 %changelog
+* Fri Jan 20 2006 Charlie Brady <charlieb@e-smith.com> 1.11.2-14
+- Sort domains in imp configuration with primary domain first. [SME: 521]
+
 * Wed Nov 30 2005 Gordon Rowell <gordonr@gormand.com.au> 1.11.2-13
 - Bump release number only
 
@@ -452,6 +455,7 @@ so that IMP will work properly.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 
 %build
 mkdir -p root/home/httpd/html/horde/imp/SSLonly
