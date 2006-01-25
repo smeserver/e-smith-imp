@@ -1,0 +1,12 @@
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-1.11.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/servers.php/120IMAPServers mezzanine_patched_e-smith-imp-1.11.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/servers.php/120IMAPServers
+--- e-smith-imp-1.11.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/servers.php/120IMAPServers	2006-01-25 10:00:07.000000000 -0500
++++ mezzanine_patched_e-smith-imp-1.11.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/servers.php/120IMAPServers	2006-01-25 09:59:24.000000000 -0500
+@@ -3,7 +3,7 @@
+     my $db = esmith::DomainsDB->open_ro;
+     my @domains = ($DomainName,
+ 	map { $_->key }
+-	    grep { $_->prop('SystemPrimaryDomain') ne 'yes' }
++	    grep { my $p = $_->prop('SystemPrimaryDomain') || ''; $p ne 'yes' }
+ 		$db->get_all());
+     foreach my $domain (@domains)
+     {
