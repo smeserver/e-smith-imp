@@ -2,7 +2,7 @@ Summary: e-smith specific IMP configuration and templates.
 %define name e-smith-imp
 Name: %{name}
 %define version 1.11.2
-%define release 15
+%define release 16
 Version: %{version}
 Release: %{release}
 License: GPL
@@ -17,6 +17,7 @@ Patch4: e-smith-imp-1.11.2-06.mitel_patch
 Patch5: e-smith-imp-1.11.2-07.mitel_patch
 Patch6: e-smith-imp-1.11.2-domains.patch
 Patch7: e-smith-imp-1.11.2-domains.patch2
+Patch8: e-smith-imp-1.11.2-disposition_send_mdn.patch
 Packager: e-smith developers <bugs@e-smith.com>
 BuildRoot: /var/tmp/%{name}-%{version}-%{release}-buildroot
 BuildArchitectures: noarch
@@ -39,6 +40,9 @@ AutoReqProv: no
 Obsoletes: dcb-e-smith-imp
 
 %changelog
+* Tue Feb 07 2006 Charlie Brady <charlie_brady@mitel.com> 1.11.2-16
+- Fix issues with configuration of receipt request. [SME: 427]
+
 * Wed Jan 25 2006 Charlie Brady <charlieb@e-smith.com> 1.11.2-15
 - Fix warning message from last change. [SME: 568]
 
@@ -462,6 +466,7 @@ so that IMP will work properly.
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
+%patch8 -p1
 
 %build
 mkdir -p root/home/httpd/html/horde/imp/SSLonly
