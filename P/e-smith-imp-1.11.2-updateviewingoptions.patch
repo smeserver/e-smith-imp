@@ -1,0 +1,9 @@
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-1.11.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/040use_maillog mezzanine_patched_e-smith-imp-1.11.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/040use_maillog
+--- e-smith-imp-1.11.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/040use_maillog	2006-02-15 05:16:03.463753759 +1100
++++ mezzanine_patched_e-smith-imp-1.11.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/040use_maillog	2006-02-15 03:59:44.000000000 +1100
+@@ -1,4 +1,4 @@
+ if (!empty($GLOBALS['conf']['maillog']['use_maillog'])) \{
+-    $prefGroups['viewing']['members'] = array_merge($prefGroups['compose']['members'], array('disposition_send_mdn'));
++    $prefGroups['viewing']['members'] = array_merge($prefGroups['viewing']['members'], array('disposition_send_mdn'));
+ \}
+ 

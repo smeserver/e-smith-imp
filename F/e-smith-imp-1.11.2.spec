@@ -2,7 +2,7 @@ Summary: e-smith specific IMP configuration and templates.
 %define name e-smith-imp
 Name: %{name}
 %define version 1.11.2
-%define release 16
+%define release 17
 Version: %{version}
 Release: %{release}
 License: GPL
@@ -18,6 +18,7 @@ Patch5: e-smith-imp-1.11.2-07.mitel_patch
 Patch6: e-smith-imp-1.11.2-domains.patch
 Patch7: e-smith-imp-1.11.2-domains.patch2
 Patch8: e-smith-imp-1.11.2-disposition_send_mdn.patch
+Patch9: e-smith-imp-1.11.2-updateviewingoptions.patch
 Packager: e-smith developers <bugs@e-smith.com>
 BuildRoot: /var/tmp/%{name}-%{version}-%{release}-buildroot
 BuildArchitectures: noarch
@@ -40,6 +41,9 @@ AutoReqProv: no
 Obsoletes: dcb-e-smith-imp
 
 %changelog
+* Tue Feb 14 2006 Gavin Weight <gweight@gmail.com> 1.11.2-17
+- Fix issues with message viewing options. [SME: 427]
+
 * Tue Feb 07 2006 Charlie Brady <charlie_brady@mitel.com> 1.11.2-16
 - Fix issues with configuration of receipt request. [SME: 427]
 
@@ -467,6 +471,7 @@ so that IMP will work properly.
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
+%patch9 -p1
 
 %build
 mkdir -p root/home/httpd/html/horde/imp/SSLonly
