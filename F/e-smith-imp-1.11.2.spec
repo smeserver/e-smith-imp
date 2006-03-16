@@ -1,24 +1,14 @@
 Summary: e-smith specific IMP configuration and templates.
 %define name e-smith-imp
 Name: %{name}
-%define version 1.11.2
-%define release 17
+%define version 1.12.0
+%define release 01
 Version: %{version}
 Release: %{release}
 License: GPL
 Vendor: Mitel Networks Corporation
 Group: Networking/Daemons
 Source: %{name}-%{version}.tar.gz
-Patch0: e-smith-imp-1.11.2-02.mitel_patch
-Patch1: e-smith-imp-1.11.2-03.mitel_patch
-Patch2: e-smith-imp-1.11.2-04.mitel_patch
-Patch3: e-smith-imp-1.11.2-05.mitel_patch
-Patch4: e-smith-imp-1.11.2-06.mitel_patch
-Patch5: e-smith-imp-1.11.2-07.mitel_patch
-Patch6: e-smith-imp-1.11.2-domains.patch
-Patch7: e-smith-imp-1.11.2-domains.patch2
-Patch8: e-smith-imp-1.11.2-disposition_send_mdn.patch
-Patch9: e-smith-imp-1.11.2-updateviewingoptions.patch
 Packager: e-smith developers <bugs@e-smith.com>
 BuildRoot: /var/tmp/%{name}-%{version}-%{release}-buildroot
 BuildArchitectures: noarch
@@ -41,6 +31,9 @@ AutoReqProv: no
 Obsoletes: dcb-e-smith-imp
 
 %changelog
+* Wed Mar 15 2006 Charlie Brady <charlie_brady@mitel.com> 1.12.0-01
+- Roll stable stream version. [SME: 1016]
+
 * Tue Feb 14 2006 Gavin Weight <gweight@gmail.com> 1.11.2-17
 - Fix issues with message viewing options. [SME: 427]
 
@@ -462,16 +455,6 @@ so that IMP will work properly.
 
 %prep
 %setup
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
-%patch7 -p1
-%patch8 -p1
-%patch9 -p1
 
 %build
 mkdir -p root/home/httpd/html/horde/imp/SSLonly
