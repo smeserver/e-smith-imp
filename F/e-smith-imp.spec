@@ -1,18 +1,24 @@
 Summary: e-smith specific IMP configuration and templates.
 %define name e-smith-imp
 Name: %{name}
-%define version 1.12.0
-%define release 2
+%define version 1.13.0
+%define release 8
 Version: %{version}
 Release: %smerelease %{release}
 Packager: %{_packager}
 License: GPL
 Vendor: Mitel Networks Corporation
 Group: Networking/Daemons
+Patch0: e-smith-imp-1.13.0-02.conf_php.patch
+Patch1: e-smith-imp-1.13.0-03.server_php_header_txt.patch 
+Patch2: e-smith-imp-1.13.0-04.prefs_php.patch
+Patch3: e-smith-imp-1.13.0-05.createlinks.patch
+Patch4: e-smith-imp-1.13.0-06.menuarray.patch
+Patch5: e-smith-imp-1.13.0-07.imp_horde_registry_php.patch 
 Source: %{name}-%{version}.tar.gz
 BuildRoot: /var/tmp/%{name}-%{version}-%{release}-buildroot
 BuildArchitectures: noarch
-Requires: imp-h3 >= 4.0
+Requires: imp-h3 >= 4.1
 Requires: e-smith-base >= 4.15.1
 Requires: e-smith-apache >= 1.1.0-18
 Requires: e-smith-lib >= 1.15.1-16
@@ -29,11 +35,41 @@ Requires: pear-mail
 Requires: pear-mail_mime
 AutoReqProv: no
 Obsoletes: dcb-e-smith-imp
+Obsoletes: smeserver-imp-menuarray
 
 %changelog
-* Thu Dec 07 2006 Shad L. Lords <slords@mail.com>
+* Sat Dec 09 2006 Shad L. Lords <slords@mail.com>
 - Update to new release naming.  No functional changes.
 - Make Packager generic
+
+* Thu Oct 5 2006 John H. Bennett III <bennettj@johnbennettservices.com> 1.13.0-07
+- Added imp specific horde/config/registry.php settings.  These were previously
+  kept in the e-smith-horde rpm.
+
+* Sat Sep 23 2006 John H. Bennett III <bennettj@johnbennettservices.com> 1.13.0-06
+- Added an includes statement to 120Menusettings that will grab the information in 
+  horde/conf.menu.apps.php.  This way each of the individual horde modules don't 
+  have to repeatedly process the same template for the menu array section in conf.php.
+- Added the ability to enable or disable imp menu icon from showing up on the
+  main webmail screen.  To enable- config setprop imp MenuArray disabled|enabled
+  enabled by default
+
+* Tue Sep 19 2006 John H. Bennett III <bennettj@johnbennettservices.com> 1.13.0-05
+- Patch to move the items in the spec file that created the template-php symlinks
+  to the createlinks section.  
+
+* Tue Sep 19 2006 John H. Bennett III <bennettj@johnbennettservices.com> 1.13.0-04
+- Patch to prefs.php templates to reflect changes in imp 4.1.3
+
+* Sat Sep 16 2006 John H. Bennett III <bennettj@johnbennettservices.com> 1.13.0-03
+- Patch to servers.php templates to reflect changes in imp 4.1.3
+- Patch to header.txt template that changes name to SME Server
+
+* Sat Sep 16 2006 John H. Bennett III <bennettj@johnbennettservices.com> 1.13.0-02
+- Patch to conf.php templates to reflect changes in imp 4.1.3
+
+* Fri Sep 15 2006 John H. Bennett III <bennettj@johnbennettservices.com> 1.13.0-01
+- Rolled to new dev stream to reflect work done for imp 4.1.3
 
 * Wed Mar 15 2006 Charlie Brady <charlie_brady@mitel.com> 1.12.0-01
 - Roll stable stream version. [SME: 1016]
@@ -460,17 +496,15 @@ so that IMP will work properly.
 %prep
 %setup
 
+%patch0 -p1
+%patch1 -p1
+%patch2 -p1
+%patch3 -p1
+%patch4 -p1
+%patch5 -p1
+
 %build
 mkdir -p root/home/httpd/html/horde/imp/SSLonly
-
-for file in conf.php servers.php prefs.php
-do 
-    mkdir -p root/etc/e-smith/templates/home/httpd/html/horde/imp/config/$file
-    ln -s /etc/e-smith/templates-default/template-begin-php \
-         root/etc/e-smith/templates/home/httpd/html/horde/imp/config/$file/template-begin
-    ln -s /etc/e-smith/templates-default/template-end-php \
-         root/etc/e-smith/templates/home/httpd/html/horde/imp/config/$file/template-end
-done
  
 perl createlinks
 
