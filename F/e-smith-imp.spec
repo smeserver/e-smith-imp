@@ -2,7 +2,7 @@ Summary: e-smith specific IMP configuration and templates.
 %define name e-smith-imp
 Name: %{name}
 %define version 1.13.0
-%define release 8
+%define release 9
 Version: %{version}
 Release: %smerelease %{release}
 Packager: %{_packager}
@@ -15,6 +15,7 @@ Patch2: e-smith-imp-1.13.0-04.prefs_php.patch
 Patch3: e-smith-imp-1.13.0-05.createlinks.patch
 Patch4: e-smith-imp-1.13.0-06.menuarray.patch
 Patch5: e-smith-imp-1.13.0-07.imp_horde_registry_php.patch 
+Patch6: e-smith-imp-1.13.0-09.imp_414.patch
 Source: %{name}-%{version}.tar.gz
 BuildRoot: /var/tmp/%{name}-%{version}-%{release}-buildroot
 BuildArchitectures: noarch
@@ -38,6 +39,9 @@ Obsoletes: dcb-e-smith-imp
 Obsoletes: smeserver-imp-menuarray
 
 %changelog
+* Sun Mar 25 2007 John H. Bennett III <bennettj@johnbennettservices.com> 1.13.0-09
+- Updated imp conf.php and servers.php templates per imp 4.1.4 [SME: 2785]
+
 * Sat Dec 09 2006 Shad L. Lords <slords@mail.com>
 - Update to new release naming.  No functional changes.
 - Make Packager generic
@@ -502,6 +506,7 @@ so that IMP will work properly.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 
 %build
 mkdir -p root/home/httpd/html/horde/imp/SSLonly
