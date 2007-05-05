@@ -4,10 +4,8 @@ Name: %{name}
 %define version 1.13.0
 %define release 9
 Version: %{version}
-Release: %smerelease %{release}
-Packager: %{_packager}
+Release: %{release}%{?dist}
 License: GPL
-Vendor: Mitel Networks Corporation
 Group: Networking/Daemons
 Patch0: e-smith-imp-1.13.0-02.conf_php.patch
 Patch1: e-smith-imp-1.13.0-03.server_php_header_txt.patch 
@@ -34,11 +32,15 @@ Requires: pear-file
 Requires: pear-log
 Requires: pear-mail
 Requires: pear-mail_mime
+BuildRequires: e-smith-devtools >= 1.13.1-03
 AutoReqProv: no
 Obsoletes: dcb-e-smith-imp
 Obsoletes: smeserver-imp-menuarray
 
 %changelog
+* Sun Apr 29 2007 Shad L. Lords <slords@mail.com>
+- Clean up spec so package can be built by koji/plague
+
 * Sun Mar 25 2007 John H. Bennett III <bennettj@johnbennettservices.com> 1.13.0-09
 - Updated imp conf.php and servers.php templates per imp 4.1.4 [SME: 2785]
 
