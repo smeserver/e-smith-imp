@@ -1,0 +1,15 @@
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-1.13.0/createlinks mezzanine_patched_e-smith-imp-1.13.0/createlinks
+--- e-smith-imp-1.13.0/createlinks	2006-03-15 20:55:05.000000000 -0600
++++ mezzanine_patched_e-smith-imp-1.13.0/createlinks	2006-09-19 21:51:21.000000000 -0500
+@@ -12,3 +12,11 @@
+ 	    email-update
+ 	));
+ }
++
++foreach (qw(conf.php prefs.php servers.php))
++{
++    safe_symlink("/etc/e-smith/templates-default/template-begin-php",
++        "root/etc/e-smith/templates/home/httpd/html/horde/imp/config/$_/template-begin");
++    safe_symlink("/etc/e-smith/templates-default/template-end-php",
++        "root/etc/e-smith/templates/home/httpd/html/horde/imp/config/$_/template-end");
++}
