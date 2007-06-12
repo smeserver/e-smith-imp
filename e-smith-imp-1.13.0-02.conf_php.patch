@@ -1,0 +1,66 @@
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-1.13.0/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/conf.php/00header mezzanine_patched_e-smith-imp-1.13.0/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/conf.php/00header
+--- e-smith-imp-1.13.0/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/conf.php/00header	2006-03-15 20:55:05.000000000 -0600
++++ mezzanine_patched_e-smith-imp-1.13.0/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/conf.php/00header	2006-09-16 07:36:12.000000000 -0500
+@@ -1,3 +1,3 @@
+ // 00header
+ /* CONFIG START. DO NOT CHANGE ANYTHING IN OR AFTER THIS LINE. */
+-// $Horde: imp/config/conf.xml,v 1.53 2004/12/09 15:33:27 slusarz Exp $
++// $Horde: imp/config/conf.xml,v 1.53.2.13 2006/06/14 18:11:23 chuck Exp $
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-1.13.0/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/conf.php/120MenuSettings mezzanine_patched_e-smith-imp-1.13.0/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/conf.php/120MenuSettings
+--- e-smith-imp-1.13.0/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/conf.php/120MenuSettings	2006-03-15 20:55:05.000000000 -0600
++++ mezzanine_patched_e-smith-imp-1.13.0/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/conf.php/120MenuSettings	2006-09-16 07:36:23.000000000 -0500
+@@ -1,3 +1,2 @@
+ // 120MenuSettings
+ $conf['menu']['apps'] = array('turba');
+-
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-1.13.0/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/conf.php/140UserCapabilities mezzanine_patched_e-smith-imp-1.13.0/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/conf.php/140UserCapabilities
+--- e-smith-imp-1.13.0/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/conf.php/140UserCapabilities	2006-03-15 20:55:05.000000000 -0600
++++ mezzanine_patched_e-smith-imp-1.13.0/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/conf.php/140UserCapabilities	2006-09-16 07:49:42.000000000 -0500
+@@ -1,8 +1,8 @@
+ // 140UserCapabilities
++$conf['user']['select_sentmail_folder'] = false;
++$conf['user']['allow_resume_all_in_drafts'] = true;
+ $conf['user']['allow_folders'] = true;
+-$conf['user']['allow_view_source'] = true;
+ $conf['user']['allow_resume_all'] = false;
+-$conf['user']['allow_resume_all_in_drafts'] = true;
++$conf['user']['allow_view_source'] = true;
+ $conf['user']['alternate_login'] = false;
+ $conf['user']['redirect_on_logout'] = false;
+-$conf['user']['select_sentmail_folder'] = false;
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-1.13.0/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/conf.php/160MailServerSettings mezzanine_patched_e-smith-imp-1.13.0/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/conf.php/160MailServerSettings
+--- e-smith-imp-1.13.0/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/conf.php/160MailServerSettings	2006-03-15 20:55:05.000000000 -0600
++++ mezzanine_patched_e-smith-imp-1.13.0/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/conf.php/160MailServerSettings	2006-09-16 07:54:48.000000000 -0500
+@@ -1,8 +1,9 @@
+ // 160MailServerSettings
+ $conf['server']['server_list'] = 'none';
+ $conf['server']['change_server'] = false;
+-$conf['server']['change_port'] = false;
++$conf['server']['change_port'] = false;  
+ $conf['server']['change_protocol'] = false;
+-$conf['server']['change_folders'] = false;
++$conf['server']['change_folders'] = false; 
+ $conf['server']['sort_limit'] = '0';
+ $conf['server']['cache_folders'] = false;
++$conf['server']['cache_msgbody'] = false;
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-1.13.0/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/conf.php/240ComposeSettings mezzanine_patched_e-smith-imp-1.13.0/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/conf.php/240ComposeSettings
+--- e-smith-imp-1.13.0/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/conf.php/240ComposeSettings	2006-03-15 20:55:05.000000000 -0600
++++ mezzanine_patched_e-smith-imp-1.13.0/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/conf.php/240ComposeSettings	2006-09-16 08:03:04.000000000 -0500
+@@ -5,7 +5,8 @@
+ $conf['compose']['allow_receipts'] = true;
+ $conf['compose']['special_characters'] = true;
+ $conf['compose']['link_all_attachments'] = false;
++$conf['compose']['link_attachments_notify'] = true;
+ $conf['compose']['link_attachments'] = true;
+ $conf['compose']['add_maildomain_to_unexpandable'] = false;
+-$conf['compose']['attach_size_limit'] = '0';
++$conf['compose']['attach_size_limit'] = '0'; 
+ $conf['compose']['attach_count_limit'] = '0';
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-1.13.0/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/conf.php/280Other mezzanine_patched_e-smith-imp-1.13.0/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/conf.php/280Other
+--- e-smith-imp-1.13.0/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/conf.php/280Other	2006-03-15 20:55:05.000000000 -0600
++++ mezzanine_patched_e-smith-imp-1.13.0/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/conf.php/280Other	2006-09-16 08:03:29.000000000 -0500
+@@ -1,3 +1,4 @@
+ // 280Other
+ $conf['maillog']['use_maillog'] = true;
+ $conf['tasklist']['use_tasklist'] = true;
++$conf['notepad']['use_notepad'] = true;
