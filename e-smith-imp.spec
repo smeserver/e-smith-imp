@@ -2,7 +2,7 @@ Summary: e-smith specific IMP configuration and templates.
 %define name e-smith-imp
 Name: %{name}
 %define version 1.13.0
-%define release 10
+%define release 11
 Version: %{version}
 Release: %{release}%{?dist}
 License: GPL
@@ -14,6 +14,7 @@ Patch3: e-smith-imp-1.13.0-05.createlinks.patch
 Patch4: e-smith-imp-1.13.0-06.menuarray.patch
 Patch5: e-smith-imp-1.13.0-07.imp_horde_registry_php.patch 
 Patch6: e-smith-imp-1.13.0-09.imp_414.patch
+Patch7: e-smith-imp-1.13.0-10.imp_415.patch
 Source: %{name}-%{version}.tar.gz
 BuildRoot: /var/tmp/%{name}-%{version}-%{release}-buildroot
 BuildArchitectures: noarch
@@ -31,6 +32,9 @@ Obsoletes: dcb-e-smith-imp
 Obsoletes: smeserver-imp-menuarray
 
 %changelog
+* Tue Nov 13 2007 John H. Bennett III <bennettj@johnbennettservices.com> 1.13.0-11
+- Updated imp conf.php template per imp 4.1.5 [SME: 3573]
+
 * Wed May 9 2007 Shad L. Lords <slords@mail.com> 1.13.0-10
 - Move pear module requires to e-smith-horde
 
@@ -505,6 +509,7 @@ so that IMP will work properly.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+%patch7 -p1
 
 %build
 mkdir -p root/home/httpd/html/horde/imp/SSLonly
