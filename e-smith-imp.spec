@@ -1,3 +1,5 @@
+# $Id: e-smith-imp.spec,v 1.3 2008/04/09 13:51:48 slords Exp $
+
 Summary: e-smith specific IMP configuration and templates.
 %define name e-smith-imp
 Name: %{name}
