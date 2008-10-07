@@ -1,9 +1,9 @@
-# $Id: e-smith-imp.spec,v 1.4 2008/06/26 04:49:24 slords Exp $
+# $Id: e-smith-imp.spec,v 1.5 2008/10/07 18:30:47 slords Exp $
 
 Summary: e-smith specific IMP configuration and templates.
 %define name e-smith-imp
 Name: %{name}
-%define version 4.2
+%define version 5.0.0
 %define release 1
 Version: %{version}
 Release: %{release}%{?dist}
@@ -26,6 +26,9 @@ Obsoletes: dcb-e-smith-imp
 Obsoletes: smeserver-imp-menuarray
 
 %changelog
+* Tue Oct 7 2008 Shad L. Lords <slords@mail.com> 5.0.0-1.sme
+- Roll new stream to separate sme7/sme8 trees [SME: 4633]
+
 * Mon Jun 23 2008 John H. Bennett III <bennettj@johnbennettservices.com> 4.2-1
 - Initial build
 - Jump in package name to reflect new version of imp
