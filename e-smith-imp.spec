@@ -1,15 +1,16 @@
-# $Id: e-smith-imp.spec,v 1.5 2008/10/07 18:30:47 slords Exp $
+# $Id: e-smith-imp.spec,v 1.6 2008/12/06 21:30:32 mrjhb3 Exp $
 
 Summary: e-smith specific IMP configuration and templates.
 %define name e-smith-imp
 Name: %{name}
 %define version 5.0.0
-%define release 1
+%define release 3
 Version: %{version}
 Release: %{release}%{?dist}
 License: GPL
 Group: Networking/Daemons
 Source: %{name}-%{version}.tar.gz
+Patch1: e-smith-imp_imp-4.3.patch
 BuildRoot: /var/tmp/%{name}-%{version}-%{release}-buildroot
 BuildArchitectures: noarch
 Requires: imp-h3 >= 4.2
@@ -26,6 +27,9 @@ Obsoletes: dcb-e-smith-imp
 Obsoletes: smeserver-imp-menuarray
 
 %changelog
+* Sat Dec 06 2008 John H. Bennett III <bennettj@johnbennettservices.com> 5.0.0-2       
+- Updated templates to reflect changes in imp 4.3 [SME: 4832]
+
 * Tue Oct 7 2008 Shad L. Lords <slords@mail.com> 5.0.0-1.sme
 - Roll new stream to separate sme7/sme8 trees [SME: 4633]
 
@@ -39,6 +43,8 @@ so that IMP will work properly on SME Server
 
 %prep
 %setup
+
+%patch1 -p1
 
 %build
 mkdir -p root/home/httpd/html/horde/imp/SSLonly

@@ -1,0 +1,1260 @@
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/conf.php/00header mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/conf.php/00header
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/conf.php/00header	2008-05-25 04:07:03.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/conf.php/00header	2008-10-04 11:39:03.000000000 -0500
+@@ -1,4 +1,4 @@
+ // 00header
+ /* CONFIG START. DO NOT CHANGE ANYTHING IN OR AFTER THIS LINE. */
+-// $Horde: imp/config/conf.xml,v 1.53.2.33 2008/05/06 17:54:04 slusarz Exp $
++// $Horde: imp/config/conf.xml,v 1.53.2.39 2008/09/03 18:56:45 slusarz Exp $
+ 
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/hooks.php/00header mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/hooks.php/00header
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/hooks.php/00header	2008-04-21 23:00:10.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/hooks.php/00header	2008-10-04 11:30:46.000000000 -0500
+@@ -8,7 +8,7 @@
+  *
+  * For more information please see the horde/config/hooks.php.dist file.
+  *
+- * $Horde: imp/config/hooks.php.dist,v 1.3.2.4 2008/03/10 17:13:06 slusarz Exp $
++ * $Horde: imp/config/hooks.php.dist,v 1.3.2.5 2008/06/05 09:04:14 jan Exp $
+  */
+ 
+ 
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/000header mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/000header
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/000header	2008-06-07 20:51:02.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/000header	2008-10-01 21:55:47.000000000 -0500
+@@ -1,6 +1,6 @@
+ //000preamble
+ /**
+- * $Horde: imp/config/prefs.php.dist,v 1.216.4.28 2008/05/12 12:21:22 jan Exp $
++ * $Horde: imp/config/prefs.php.dist,v 1.216.4.34 2008/08/28 21:03:15 slusarz Exp $
+  *
+  * See horde/config/prefs.php for documentation on the structure of this file.
+  */
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/020logintasks mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/020logintasks
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/020logintasks	2008-06-07 20:21:21.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/020logintasks	2008-10-01 22:06:40.000000000 -0500
+@@ -15,4 +15,7 @@
+               'purge_trash_keep', 'purge_spam', 'purge_spam_interval',
+               'purge_spam_keep'));
+ \}
++$prefGroups['logintasks']['members'] = array_merge(
++    $prefGroups['logintasks']['members'],
++    array('delete_attachments_monthly', 'delete_attachments_monthly_keep'));
+ 
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/025compose mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/025compose
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/025compose	2008-04-19 22:42:26.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/025compose	2008-10-01 22:09:39.000000000 -0500
+@@ -3,14 +3,11 @@
+     'column' => _("Message Options"),
+     'label' => _("Message Composition"),
+     'desc' => _("Customize how you send mail."),
+-    'members' => array('mail_domain', 'compose_popup', 'compose_html',
+-                      'jseditor', 'fckeditor_buttons', 'xinha_hide_buttons',
+-                       'compose_cursor', 'compose_cc', 'compose_bcc',
+-                       'stationery_link', 'compose_spellcheck',
+-                       'compose_confirm', 'reply_quote',
+-                       'reply_format', 'forward_default', 'forward_bodytext',
+-                       'reply_headers', 'attrib_text', 'folderselect',
+-                       'close_draft', 'unseen_drafts', 'set_priority',
+-                       'sending_charset', 'encryptselect', 'save_attachments')
++    'members' => array('stationery_link', 'mailto_handler', 'compose_cc',
++                       'compose_bcc', 'compose_spellcheck', 'compose_confirm',
++                       'set_priority', 'compose_popup', 'compose_html',
++                       'jseditor', 'fckeditor_buttons', 'xinha_hide_buttons',
++                       'mail_domain', 'compose_cursor', 'sending_charset',   
++                       'encryptselect', 'save_attachments')
+ );
+ 
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/032reply_forward mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/032reply_forward
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/032reply_forward	1969-12-31 18:00:00.000000000 -0600
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/032reply_forward	2008-10-01 22:12:41.000000000 -0500
+@@ -0,0 +1,9 @@
++//032reply_forward
++$prefGroups['reply_forward'] = array(
++    'column' => _("Message Options"),
++    'label' => _("Message Replies/Forwards"),
++    'desc' => _("Customize how you reply to or forward mail."),
++    'members' => array('reply_quote', 'reply_format', 'forward_default',
++                       'forward_bodytext', 'reply_headers', 'attrib_text')
++);
++
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/033drafts mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/033drafts
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/033drafts	1969-12-31 18:00:00.000000000 -0600
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/033drafts	2008-10-01 22:12:48.000000000 -0500
+@@ -0,0 +1,8 @@
++//033drafts
++$prefGroups['drafts'] = array(
++    'column' => _("Message Options"),
++    'label' => _("Message Drafts"),  
++    'desc' => _("Customize how to deal with message drafts."),
++    'members' => array('folderselect', 'close_draft', 'unseen_drafts')
++);
++
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/135sent_mail_folder mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/135sent_mail_folder
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/135sent_mail_folder	2008-04-21 22:52:40.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/135sent_mail_folder	2008-10-01 22:20:10.000000000 -0500
+@@ -1,11 +1,14 @@
+ //135sent_mail_folder
+ // sent mail folder
+ $_prefs['sent_mail_folder'] = array(
++    // The mailbox value must be encoded in the UTF7-IMAP charset (see RFC
++    // 3501 [5.1.3]). For Exchange, uncomment the entry below and remove the
++    // default value entry.
++    // 'value' => 'Sent Items',
++    // 'value' => _("Sent"),
++    // value below for SME Server that is consistent from day one
+     'value' => 'sent-mail',
+-//    'value' => _("Sent"),
+-// For Exchange server uncomment the line below and delete the line above
+-//    'value' => 'Sent Items',
+-    'locked' => false,
+-    'shared' => false,
++    'locked' => false,   
++    'shared' => false,   
+     'type' => 'implicit');
+ 
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/155drafts_folder mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/155drafts_folder
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/155drafts_folder	2008-04-19 23:00:32.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/155drafts_folder	2008-10-01 22:24:03.000000000 -0500
+@@ -1,7 +1,8 @@
+ //155drafts_folder
+ // drafts folder
+ $_prefs['drafts_folder'] = array(
+-//    'value' => 'drafts',
++    // The mailbox value must be encoded in the UTF7-IMAP charset (see RFC
++    // 3501 [5.1.3]).
+     'value' => _("Drafts"),
+     'locked' => false,
+     'shared' => false,
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/165trash_folder mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/165trash_folder
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/165trash_folder	2008-04-21 22:51:23.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/165trash_folder	2008-10-01 22:26:02.000000000 -0500
+@@ -1,11 +1,14 @@
+ //165trash_folder
+ // trash folder
+ $_prefs['trash_folder'] = array(
+-// for Exchange, uncomment the entry below and remove the default value entry
+-//    'value' => 'Deleted Items',
+-//    'value' => _("Trash"),
++    // The mailbox value must be encoded in the UTF7-IMAP charset (see RFC
++    // 3501 [5.1.3]). For Exchange, uncomment the entry below and remove the
++    // default value entry.
++    // 'value' => 'Deleted Items',
++    //'value' => _("Trash"),
++    // Value below for SME Server so that it's consistent from the beginning
+     'value' => 'trash',
+     'locked' => false,
+     'shared' => false,
+     'type' => 'implicit');
+-
++    
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/175spam_folder mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/175spam_folder
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/175spam_folder	2008-04-20 10:55:57.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/175spam_folder	2008-10-01 22:27:01.000000000 -0500
+@@ -1,8 +1,10 @@
+ //175spam_folder
+ // spam folder
+ $_prefs['spam_folder'] = array(
++    // The mailbox value must be encoded in the UTF7-IMAP charset (see RFC
++    // 3501 [5.1.3]).
+     'value' => _("Spam"),
+-    'locked' => false,
+-    'shared' => false,
++    'locked' => false,   
++    'shared' => false,   
+     'type' => 'implicit');
+ 
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/250mail_domain mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/250mail_domain
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/250mail_domain	2008-04-20 11:10:04.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/250mail_domain	1969-12-31 18:00:00.000000000 -0600
+@@ -1,11 +0,0 @@
+-//250mail_domain
+-// Message Composition preferences
+-
+-// default outgoing mail domain and address completion
+-$_prefs['mail_domain'] = array(
+-    'value' => '',
+-    'locked' => false,
+-    'shared' => false,
+-    'type' => 'text',
+-    'desc' => _("When sending mail or expanding addresses, what domain should we append to unqualified addresses (email addresses without \"@\")?"));
+-
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/250stationary_link mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/250stationary_link
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/250stationary_link	1969-12-31 18:00:00.000000000 -0600
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/250stationary_link	2008-10-02 22:41:55.000000000 -0500
+@@ -0,0 +1,9 @@
++//250stationary_link
++// Message Composition preferences
++
++// Link to the stationery preferences.
++$_prefs['stationery_link'] = array(
++    'type' => 'link',
++    'url' => 'stationery.php',
++    'desc' => _("To the stationery and form responses."));
++
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/255compose_popup mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/255compose_popup
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/255compose_popup	2008-04-20 11:10:34.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/255compose_popup	1969-12-31 18:00:00.000000000 -0600
+@@ -1,10 +0,0 @@
+-//255compose_popup
+-// compose in a separate window?
+-$_prefs['compose_popup'] = array(
+-    'value' => 1,
+-    'locked' => false,
+-    'shared' => false,
+-    'type' => 'checkbox',
+-    'desc' => _("Compose messages in a separate window?")
+-);
+-
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/255stationary mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/255stationary
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/255stationary	1969-12-31 18:00:00.000000000 -0600
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/255stationary	2008-10-02 22:42:40.000000000 -0500
+@@ -0,0 +1,7 @@
++//255stationary
++$_prefs['stationery'] = array(
++    'value' => 'a:0:\{\}',
++    'locked' => false, 
++    'shared' => false,
++    'type' => 'implicit');
++
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/257mailto_handler mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/257mailto_handler
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/257mailto_handler	1969-12-31 18:00:00.000000000 -0600
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/257mailto_handler	2008-10-02 22:44:07.000000000 -0500
+@@ -0,0 +1,12 @@
++//257mailto_handler
++// Link to add a Firefox 3 mailto: handler
++$_prefs['mailto_handler'] = array(
++    'type' => 'link',
++    'xurl' => 'javascript:if(typeof navigator.registerProtocolHandler==\'undefined\')alert(\''
++        . addslashes(_("Your browser does not support this feature."))
++        . '\');else navigator.registerProtocolHandler(\'mailto\',\''  
++        . Util::addParameter(Horde::applicationUrl('compose.php', true),
++                             array('actionID' => 'mailto_link', 'to' => ''), false)
++        . '%s\',\'' . $GLOBALS['registry']->get('name') . '\');',
++    'desc' => sprintf(_("Click here to open all mailto: links in %s."), $GLOBALS['registry']->get('name')));
++
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/260compose_cc mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/260compose_cc
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/260compose_cc	1969-12-31 18:00:00.000000000 -0600
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/260compose_cc	2008-10-02 22:45:39.000000000 -0500
+@@ -0,0 +1,10 @@
++//260compose_cc
++// Show Cc: field?
++$_prefs['compose_cc'] = array(
++    'value' => 1,
++    'locked' => false,
++    'shared' => false,
++    'type' => 'checkbox',
++    'desc' => _("Show the Cc: header field when composing mail?")
++);
++
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/265compose_bcc mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/265compose_bcc
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/265compose_bcc	1969-12-31 18:00:00.000000000 -0600
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/265compose_bcc	2008-10-02 22:46:54.000000000 -0500
+@@ -0,0 +1,10 @@
++//265compose_bcc
++// Show Bcc: field?
++$_prefs['compose_bcc'] = array(
++    'value' => 1,
++    'locked' => false,
++    'shared' => false,
++    'type' => 'checkbox',
++    'desc' => _("Show the Bcc: header field when composing mail?")
++);
++
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/265compose_html mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/265compose_html
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/265compose_html	2008-04-20 11:11:01.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/265compose_html	1969-12-31 18:00:00.000000000 -0600
+@@ -1,11 +0,0 @@
+-//265compose_html
+-// If browser supports the HTML editor, should we compose in HTML mode by
+-// default?
+-$_prefs['compose_html'] = array(
+-    'value' => 0,
+-    'locked' => false,
+-    'shared' => false,
+-    'type' => 'checkbox',
+-    'desc' => _("Compose messages with an HTML GUI by default (if browser supports the feature)?")
+-);
+-
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/266jseditor mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/266jseditor
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/266jseditor	2008-04-20 11:13:12.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/266jseditor	1969-12-31 18:00:00.000000000 -0600
+@@ -1,13 +0,0 @@
+-//266jseditor
+-// The default JS HTML editor.
+-$_prefs['jseditor'] = array(  
+-    'value' => 'xinha',
+-    'locked' => false, 
+-    'shared' => false, 
+-    'type' => 'enum',  
+-    // To use 'fckeditor', you must have Horde 3.2 or greater installed.
+-    'enum' => array('fckeditor' => _("FCKeditor"),
+-                    'xinha' => _("Xinha")),
+-    'desc' => _("The javascript editor to use on the compose page.")
+-);
+-
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/267fckeditor_buttons mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/267fckeditor_buttons
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/267fckeditor_buttons	2008-04-20 11:15:03.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/267fckeditor_buttons	1969-12-31 18:00:00.000000000 -0600
+@@ -1,10 +0,0 @@
+-//267fckeditor_buttons
+-// The list of buttons to show in FCKeditor
+-$_prefs['fckeditor_buttons'] = array(
+-    'value' => "[['FontFormat','FontName','FontSize'],['Bold','Italic','Underline'],['TextColor','BGColor'],'/',['JustifyLeft','JustifyCenter','JustifyRight','JustifyFull'],['OrderedList','UnorderedList','Outdent','Indent'],['Link'],['Undo','Redo']]",
+-    'locked' => true,
+-    'shared' => false,
+-    'type' => 'textarea',
+-    'desc' => _("The buttons to show when using FCKeditor.")
+-);
+-
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/268xinha_hide_buttons mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/268xinha_hide_buttons
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/268xinha_hide_buttons	2008-04-20 11:22:21.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/268xinha_hide_buttons	1969-12-31 18:00:00.000000000 -0600
+@@ -1,55 +0,0 @@
+-//268xinha_hide_buttons
+-// Hidden Xinha buttons.
+-$_prefs['xinha_hide_buttons'] = array(
+-    'value' => 'a:25:\{i:0;s:11:"popupeditor";i:1;s:13:"strikethrough";i:2;s:13:"textindicator";i:3;s:9:"subscript";i:4;s:11:"superscript";i:5;s:20:"inserthorizontalrule";i:6;s:11:"insertimage";i:7;s:11:"inserttable";i:8;s:9:"selectall";i:9;s:5:"print";i:10;s:3:"cut";i:11;s:4:"copy";i:12;s:5:"paste";i:13;s:9:"overwrite";i:14;s:6:"saveas";i:15;s:8:"killword";i:16;s:10:"clearfonts";i:17;s:12:"removeformat";i:18;s:13:"toggleborders";i:19;s:10:"splitblock";i:20;s:11:"lefttoright";i:21;s:11:"righttoleft";i:22;s:8:"htmlmode";i:23;s:8:"showhelp";i:24;s:5:"about";\}',
+-    'locked' => false,
+-    'shared' => false,
+-    'type' => 'multienum',
+-    'enum' => array(
+-        'popupeditor' => _("Maximize/Minimize Editor"),
+-        'formatblock' => _("Text Format"),
+-        'fontname' => _("Text Font"),
+-        'fontsize' => _("Text Size"),
+-        'bold' => _("Bold"),
+-        'italic' => _("Italic"),
+-        'underline' => _("Underline"),
+-        'strikethrough' => _("Strikethrough"),
+-        'forecolor' => _("Font Color"),
+-        'hilitecolor' => _("Background Color"),
+-        'textindicator' => _("Current style"), 
+-        'subscript' => _("Subscript"),
+-        'superscript' => _("Superscript"),
+-        'justifyleft' => _("Justify Left"),
+-        'justifycenter' => _("Justify Center"),
+-        'justifyright' => _("Justify Right"),  
+-        'justifyfull' => _("Justify Full"),    
+-        'insertorderedlist' => _("Ordered List"),
+-        'insertunorderedlist' => _("Bulleted List"),
+-        'outdent' => _("Decrease Indent"),
+-        'indent' => _("Increase Indent"), 
+-        'inserthorizontalrule' => _("Horizontal Rule"),
+-        'createlink' => _("Insert Web Link"),
+-        'insertimage' => _("Insert/Modify Image"),
+-        'inserttable' => _("Insert Table"),
+-        'undo' => _("Undoes your last action"),
+-        'redo' => _("Redoes your last action"),
+-        'selectall' => _("Select all"),
+-        'print' => _("Print document"),
+-        'cut' => _("Cut selection"),   
+-        'copy' => _("Copy selection"), 
+-        'paste' => _("Paste from clipboard"),
+-        'overwrite' => _("Insert/Overwrite"),
+-        'saveas' => _("Save as"),
+-        'killword' => _("Clear MSOffice tags"),
+-        'clearfonts' => _("Clear Inline Font Specifications"),
+-        'removeformat' => _("Remove formatting"),
+-        'toggleborders' => _("Toggle Borders"),  
+-        'splitblock' => _("Split Block"),
+-        'lefttoright' => _("Direction left to right"),
+-        'righttoleft' => _("Direction right to left"),
+-        'htmlmode' => _("Toggle HTML Source"),
+-        'showhelp' => _("Help using editor"), 
+-        'about' => _("About this editor")),   
+-    'desc' => _("The buttons NOT to show when using Xinha.")
+-);
+-
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/269compose_cursor mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/269compose_cursor
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/269compose_cursor	2008-04-20 11:23:28.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/269compose_cursor	1969-12-31 18:00:00.000000000 -0600
+@@ -1,13 +0,0 @@
+-//269compose_cursor
+-// Where should the cursor be located in the compose text area by default?
+-$_prefs['compose_cursor'] = array(
+-    'value' => 'top',
+-    'locked' => false,
+-    'shared' => false,
+-    'type' => 'enum', 
+-    'enum' => array('top' => _("Top"),
+-                    'bottom' => _("Bottom"),
+-                    'sig' => _("Before Signature")),
+-    'desc' => _("Where should the cursor be located in the compose text area by default?")
+-);
+-
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/270compose_cc mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/270compose_cc
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/270compose_cc	2008-04-20 11:24:11.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/270compose_cc	1969-12-31 18:00:00.000000000 -0600
+@@ -1,10 +0,0 @@
+-//270compose_cc
+-// Show Cc: field?
+-$_prefs['compose_cc'] = array(
+-    'value' => 1,
+-    'locked' => false,
+-    'shared' => false,
+-    'type' => 'checkbox',
+-    'desc' => _("Show the Cc: header field when composing mail?")
+-);
+-
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/270compose_spellcheck mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/270compose_spellcheck
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/270compose_spellcheck	1969-12-31 18:00:00.000000000 -0600
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/270compose_spellcheck	2008-10-02 22:47:42.000000000 -0500
+@@ -0,0 +1,8 @@
++//270compose_spellcheck
++// Check spelling before sending the message?
++$_prefs['compose_spellcheck'] = array(
++    'value' => 0,
++    'locked' => false,
++    'shared' => false,
++    'type' => 'checkbox',
++    'desc' => _("Check spelling before sending a message?"));
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/271compoes_bcc mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/271compoes_bcc
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/271compoes_bcc	2008-04-20 11:25:55.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/271compoes_bcc	1969-12-31 18:00:00.000000000 -0600
+@@ -1,10 +0,0 @@
+-//271compose_bcc
+-// Show Bcc: field?
+-$_prefs['compose_bcc'] = array(
+-    'value' => 1,
+-    'locked' => false,
+-    'shared' => false,
+-    'type' => 'checkbox',
+-    'desc' => _("Show the Bcc: header field when composing mail?")
+-);
+-
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/273stationary_link mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/273stationary_link
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/273stationary_link	2008-04-20 11:26:34.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/273stationary_link	1969-12-31 18:00:00.000000000 -0600
+@@ -1,7 +0,0 @@
+-//273stationary_link
+-// Link to the stationery preferences.
+-$_prefs['stationery_link'] = array(
+-    'type' => 'link',
+-    'url' => 'stationery.php',
+-    'desc' => _("Create stationery and form responses."));
+-
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/274stationary mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/274stationary
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/274stationary	2008-04-20 11:26:59.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/274stationary	1969-12-31 18:00:00.000000000 -0600
+@@ -1,7 +0,0 @@
+-//274stationary
+-$_prefs['stationery'] = array(
+-    'value' => 'a:0:\{\}',
+-    'locked' => false, 
+-    'shared' => false,
+-    'type' => 'implicit');
+-
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/275compose_confirm mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/275compose_confirm
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/275compose_confirm	1969-12-31 18:00:00.000000000 -0600
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/275compose_confirm	2008-10-02 22:48:28.000000000 -0500
+@@ -0,0 +1,9 @@
++//275compose_confirm
++// confirm successful sending of messages?
++$_prefs['compose_confirm'] = array(
++    'value' => 0,
++    'locked' => false,
++    'shared' => false,
++    'type' => 'checkbox',
++    'desc' => _("Display confirmation after sending a message?"));
++
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/275compose_spellcheck mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/275compose_spellcheck
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/275compose_spellcheck	2008-04-20 11:27:18.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/275compose_spellcheck	1969-12-31 18:00:00.000000000 -0600
+@@ -1,8 +0,0 @@
+-//275compose_spellcheck
+-// Check spelling before sending the message?
+-$_prefs['compose_spellcheck'] = array(
+-    'value' => 0,
+-    'locked' => false,
+-    'shared' => false,
+-    'type' => 'checkbox',
+-    'desc' => _("Check spelling before sending a message?"));
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/280compose_confirm mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/280compose_confirm
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/280compose_confirm	2008-04-20 11:29:26.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/280compose_confirm	1969-12-31 18:00:00.000000000 -0600
+@@ -1,9 +0,0 @@
+-//280compose_confirm
+-// confirm successful sending of messages?
+-$_prefs['compose_confirm'] = array(
+-    'value' => 0,
+-    'locked' => false,
+-    'shared' => false,
+-    'type' => 'checkbox',
+-    'desc' => _("Display confirmation after sending a message?"));
+-
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/280set_priority mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/280set_priority
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/280set_priority	1969-12-31 18:00:00.000000000 -0600
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/280set_priority	2008-10-02 22:51:51.000000000 -0500
+@@ -0,0 +1,9 @@
++//280set_priority
++// allow the user to add a "X-Priority" header when composing messages?
++$_prefs['set_priority'] = array(
++    'value' => 0,
++    'locked' => false,
++    'shared' => false,
++    'type' => 'checkbox',
++    'desc' => _("Set the X-Priority header when composing messages?"));
++
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/285compose_popup mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/285compose_popup
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/285compose_popup	1969-12-31 18:00:00.000000000 -0600
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/285compose_popup	2008-10-02 22:53:01.000000000 -0500
+@@ -0,0 +1,10 @@
++//285compose_popup
++// compose in a separate window?
++$_prefs['compose_popup'] = array(
++    'value' => 1,
++    'locked' => false,
++    'shared' => false,
++    'type' => 'checkbox',
++    'desc' => _("Compose messages in a separate window?")
++);
++
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/285reply_quote mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/285reply_quote
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/285reply_quote	2008-04-20 11:30:44.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/285reply_quote	1969-12-31 18:00:00.000000000 -0600
+@@ -1,9 +0,0 @@
+-//285reply_quote
+-// Should the original message be included?
+-$_prefs['reply_quote'] = array(
+-    'value' => 1,
+-    'locked' => false,
+-    'shared' => false,
+-    'type' => 'checkbox',
+-    'desc' => _("Include original message in a reply?"));
+-
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/286reply_format mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/286reply_format
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/286reply_format	2008-04-20 11:32:46.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/286reply_format	1969-12-31 18:00:00.000000000 -0600
+@@ -1,10 +0,0 @@
+-//286reply_format
+-// When replying/forwarding to a message, should we use the same format as the
+-// original message?
+-$_prefs['reply_format'] = array(
+-    'value' => 0,
+-    'locked' => false,
+-    'shared' => false,   
+-    'type' => 'checkbox',
+-    'desc' => _("When replying/forwarding to a message, should we use the same format as the original message?"));
+-
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/287forwad_default mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/287forwad_default
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/287forwad_default	2008-05-25 19:10:17.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/287forwad_default	1969-12-31 18:00:00.000000000 -0600
+@@ -1,13 +0,0 @@
+-//287forward_default
+-// What should the default forward method be?
+-$_prefs['forward_default'] = array(
+-    'value' => 'forward_all',
+-    'locked' => false,
+-    'shared' => false,
+-    'type' => 'enum', 
+-    'enum' => array('forward_all' => _("Entire Message"),
+-                    'forward_body' => _("Body Text Only"),
+-                    'forward_attachments' => _("Body Text with Attachments")),
+-    'desc' => _("Default forwarding method:"),
+-    'help' => 'message-forward');
+-
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/288forward_bodytext mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/288forward_bodytext
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/288forward_bodytext	2008-04-20 11:33:57.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/288forward_bodytext	1969-12-31 18:00:00.000000000 -0600
+@@ -1,9 +0,0 @@
+-//288forward_bodytext
+-// Should the original message be included?
+-$_prefs['forward_bodytext'] = array(
+-    'value' => 1,
+-    'locked' => false,
+-    'shared' => false,
+-    'type' => 'checkbox',
+-    'desc' => _("Include body text in forward message by default?"));
+-    
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/290compose_html mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/290compose_html
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/290compose_html	1969-12-31 18:00:00.000000000 -0600
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/290compose_html	2008-10-02 22:53:59.000000000 -0500
+@@ -0,0 +1,11 @@
++//290compose_html
++// If browser supports the HTML editor, should we compose in HTML mode by
++// default?
++$_prefs['compose_html'] = array(
++    'value' => 0,
++    'locked' => false,
++    'shared' => false,
++    'type' => 'checkbox',
++    'desc' => _("Compose messages with an HTML GUI by default (if browser supports the feature)?")
++);
++
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/290reply_headers mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/290reply_headers
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/290reply_headers	2008-04-20 15:30:57.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/290reply_headers	1969-12-31 18:00:00.000000000 -0600
+@@ -1,10 +0,0 @@
+-//290reply_headers
+-// Reply to header summary - leave a brief summary of the header inside
+-// the message.
+-$_prefs['reply_headers'] = array(
+-    'desc' => _("Include a brief summary of the header in a reply?"),
+-    'value' => 0,
+-    'locked' => false,
+-    'shared' => false,
+-    'type' => 'checkbox');
+-
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/295attrib_text mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/295attrib_text
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/295attrib_text	2008-04-20 11:34:47.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/295attrib_text	1969-12-31 18:00:00.000000000 -0600
+@@ -1,10 +0,0 @@
+-//295attrib_text
+-// How should we attribute quoted lines in a reply
+-$_prefs['attrib_text'] = array(
+-    'value' => _("Quoting %f:"),
+-    'locked' => false,
+-    'shared' => false,
+-    'type' => 'text',
+-    'desc' => _("How to attribute quoted lines in a reply"),
+-    'help' => 'prefs-attrib_text');
+-
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/295jseditor mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/295jseditor
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/295jseditor	1969-12-31 18:00:00.000000000 -0600
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/295jseditor	2008-10-02 22:55:44.000000000 -0500
+@@ -0,0 +1,13 @@
++//295jseditor
++// The default JS HTML editor.
++$_prefs['jseditor'] = array(  
++    'value' => 'xinha',
++    'locked' => false, 
++    'shared' => false, 
++    'type' => 'enum',  
++    // To use 'fckeditor', you must have Horde 3.2 or greater installed.
++    'enum' => array('fckeditor' => _("FCKeditor"),
++                    'xinha' => _("Xinha")),
++    'desc' => _("The javascript editor to use on the compose page.")
++);
++
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/300close_draft mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/300close_draft
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/300close_draft	2008-04-20 11:35:00.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/300close_draft	1969-12-31 18:00:00.000000000 -0600
+@@ -1,9 +0,0 @@
+-//300close_draft
+-// closing window after saving a draft?
+-$_prefs['close_draft'] = array(
+-    'value' => 1,
+-    'locked' => false,
+-    'shared' => false,
+-    'type' => 'checkbox',
+-    'desc' => _("Should the compose window be closed after saving a draft?"));
+-
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/300fckeditor_buttons mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/300fckeditor_buttons
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/300fckeditor_buttons	1969-12-31 18:00:00.000000000 -0600
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/300fckeditor_buttons	2008-10-02 22:56:45.000000000 -0500
+@@ -0,0 +1,10 @@
++//300fckeditor_buttons
++// The list of buttons to show in FCKeditor
++$_prefs['fckeditor_buttons'] = array(
++    'value' => "[['FontFormat','FontName','FontSize'],['Bold','Italic','Underline'],['TextColor','BGColor'],'/',['JustifyLeft','JustifyCenter','JustifyRight','JustifyFull'],['OrderedList','UnorderedList','Outdent','Indent'],['Link'],['Undo','Redo']]",
++    'locked' => true,
++    'shared' => false,
++    'type' => 'textarea',
++    'desc' => _("The buttons to show when using FCKeditor.")
++);
++
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/305unseen_drafts mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/305unseen_drafts
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/305unseen_drafts	2008-04-20 11:35:15.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/305unseen_drafts	1969-12-31 18:00:00.000000000 -0600
+@@ -1,9 +0,0 @@
+-//305unseen_drafts
+-// save drafts as seen or unseen
+-$_prefs['unseen_drafts'] = array(
+-    'value' => 0,
+-    'locked' => false,
+-    'shared' => false,
+-    'type' => 'checkbox',
+-    'desc' => _("Save drafts as unseen?"));
+-
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/305xinha_hide_buttons mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/305xinha_hide_buttons
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/305xinha_hide_buttons	1969-12-31 18:00:00.000000000 -0600
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/305xinha_hide_buttons	2008-10-02 22:57:53.000000000 -0500
+@@ -0,0 +1,55 @@
++//205xinha_hide_buttons
++// Hidden Xinha buttons.
++$_prefs['xinha_hide_buttons'] = array(
++    'value' => 'a:25:\{i:0;s:11:"popupeditor";i:1;s:13:"strikethrough";i:2;s:13:"textindicator";i:3;s:9:"subscript";i:4;s:11:"superscript";i:5;s:20:"inserthorizontalrule";i:6;s:11:"insertimage";i:7;s:11:"inserttable";i:8;s:9:"selectall";i:9;s:5:"print";i:10;s:3:"cut";i:11;s:4:"copy";i:12;s:5:"paste";i:13;s:9:"overwrite";i:14;s:6:"saveas";i:15;s:8:"killword";i:16;s:10:"clearfonts";i:17;s:12:"removeformat";i:18;s:13:"toggleborders";i:19;s:10:"splitblock";i:20;s:11:"lefttoright";i:21;s:11:"righttoleft";i:22;s:8:"htmlmode";i:23;s:8:"showhelp";i:24;s:5:"about";\}',
++    'locked' => false,
++    'shared' => false,
++    'type' => 'multienum',
++    'enum' => array(
++        'popupeditor' => _("Maximize/Minimize Editor"),
++        'formatblock' => _("Text Format"),
++        'fontname' => _("Text Font"),
++        'fontsize' => _("Text Size"),
++        'bold' => _("Bold"),
++        'italic' => _("Italic"),
++        'underline' => _("Underline"),
++        'strikethrough' => _("Strikethrough"),
++        'forecolor' => _("Font Color"),
++        'hilitecolor' => _("Background Color"),
++        'textindicator' => _("Current style"), 
++        'subscript' => _("Subscript"),
++        'superscript' => _("Superscript"),
++        'justifyleft' => _("Justify Left"),
++        'justifycenter' => _("Justify Center"),
++        'justifyright' => _("Justify Right"),  
++        'justifyfull' => _("Justify Full"),    
++        'insertorderedlist' => _("Ordered List"),
++        'insertunorderedlist' => _("Bulleted List"),
++        'outdent' => _("Decrease Indent"),
++        'indent' => _("Increase Indent"), 
++        'inserthorizontalrule' => _("Horizontal Rule"),
++        'createlink' => _("Insert Web Link"),
++        'insertimage' => _("Insert/Modify Image"),
++        'inserttable' => _("Insert Table"),
++        'undo' => _("Undoes your last action"),
++        'redo' => _("Redoes your last action"),
++        'selectall' => _("Select all"),
++        'print' => _("Print document"),
++        'cut' => _("Cut selection"),   
++        'copy' => _("Copy selection"), 
++        'paste' => _("Paste from clipboard"),
++        'overwrite' => _("Insert/Overwrite"),
++        'saveas' => _("Save as"),
++        'killword' => _("Clear MSOffice tags"),
++        'clearfonts' => _("Clear Inline Font Specifications"),
++        'removeformat' => _("Remove formatting"),
++        'toggleborders' => _("Toggle Borders"),  
++        'splitblock' => _("Split Block"),
++        'lefttoright' => _("Direction left to right"),
++        'righttoleft' => _("Direction right to left"),
++        'htmlmode' => _("Toggle HTML Source"),
++        'showhelp' => _("Help using editor"), 
++        'about' => _("About this editor")),   
++    'desc' => _("The buttons NOT to show when using Xinha.")
++);
++
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/307auto_save_drafts mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/307auto_save_drafts
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/307auto_save_drafts	2008-04-20 11:36:03.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/307auto_save_drafts	1969-12-31 18:00:00.000000000 -0600
+@@ -1,12 +0,0 @@
+-//307auto_save_drafts
+-// auto-save drafts? value is in minutes, 0 == don't save.
+-$_prefs['auto_save_drafts'] = array(
+-    'value' => 0,
+-    'locked' => false,
+-    'shared' => false,
+-    'type' => 'enum', 
+-    'enum' => array(0 => _("No"),
+-                    5 => _("Every 5 minutes")),
+-    'desc' => _("Save drafts automatically while composing?"),
+-);
+-
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/310mail_domain mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/310mail_domain
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/310mail_domain	1969-12-31 18:00:00.000000000 -0600
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/310mail_domain	2008-10-02 22:59:55.000000000 -0500
+@@ -0,0 +1,9 @@
++//310mail_domain
++// default outgoing mail domain and address completion
++$_prefs['mail_domain'] = array(
++    'value' => '',
++    'locked' => false,
++    'shared' => false,
++    'type' => 'text',
++    'desc' => _("When sending mail or expanding addresses, what domain should we append to unqualified addresses (email addresses without \"@\")?"));
++
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/310set_priority mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/310set_priority
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/310set_priority	2008-04-20 14:29:00.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/310set_priority	1969-12-31 18:00:00.000000000 -0600
+@@ -1,9 +0,0 @@
+-//310set_priority
+-// allow the user to add a "X-Priority" header when composing messages?
+-$_prefs['set_priority'] = array(
+-    'value' => 0,
+-    'locked' => false,
+-    'shared' => false,
+-    'type' => 'checkbox',
+-    'desc' => _("Set the X-Priority header when composing messages?"));
+-
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/312compose_cursor mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/312compose_cursor
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/312compose_cursor	1969-12-31 18:00:00.000000000 -0600
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/312compose_cursor	2008-10-02 23:00:47.000000000 -0500
+@@ -0,0 +1,13 @@
++//312compose_cursor
++// Where should the cursor be located in the compose text area by default?
++$_prefs['compose_cursor'] = array(
++    'value' => 'top',
++    'locked' => false,
++    'shared' => false,
++    'type' => 'enum', 
++    'enum' => array('top' => _("Top"),
++                    'bottom' => _("Bottom"),
++                    'sig' => _("Before Signature")),
++    'desc' => _("Where should the cursor be located in the compose text area by default?")
++);
++
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/340reply_quote mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/340reply_quote
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/340reply_quote	1969-12-31 18:00:00.000000000 -0600
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/340reply_quote	2008-10-02 23:04:38.000000000 -0500
+@@ -0,0 +1,11 @@
++//340reply_quote
++// Message Replies/Forwards preferences
++
++// Should the original message be included?
++$_prefs['reply_quote'] = array(
++    'value' => 1,
++    'locked' => false,
++    'shared' => false,
++    'type' => 'checkbox',
++    'desc' => _("Include original message in a reply?"));
++
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/345reply_format mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/345reply_format
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/345reply_format	1969-12-31 18:00:00.000000000 -0600
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/345reply_format	2008-10-02 23:05:12.000000000 -0500
+@@ -0,0 +1,10 @@
++//345reply_format
++// When replying/forwarding to a message, should we use the same format as the
++// original message?
++$_prefs['reply_format'] = array(
++    'value' => 0,
++    'locked' => false,
++    'shared' => false,   
++    'type' => 'checkbox',
++    'desc' => _("When replying/forwarding to a message, should we use the same format as the original message?"));
++
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/350filtering mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/350filtering
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/350filtering	2008-04-20 15:30:53.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/350filtering	1969-12-31 18:00:00.000000000 -0600
+@@ -1,11 +0,0 @@
+-//350filtering
+-// Message Viewing preferences
+-
+-// filter message content?
+-$_prefs['filtering'] = array(
+-    'value' => 0,
+-    'locked' => false,
+-    'shared' => false,
+-    'type' => 'checkbox',
+-    'desc' => _("Filter message content for profanity?"));
+-
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/350forward_default mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/350forward_default
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/350forward_default	1969-12-31 18:00:00.000000000 -0600
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/350forward_default	2008-10-02 23:11:20.000000000 -0500
+@@ -0,0 +1,13 @@
++//350forward_default
++// What should the default forward method be?
++$_prefs['forward_default'] = array(
++    'value' => 'forward_all',
++    'locked' => false,
++    'shared' => false,
++    'type' => 'enum', 
++    'enum' => array('forward_all' => _("Entire Message"),
++                    'forward_body' => _("Body Text Only"),
++                    'forward_attachments' => _("Body Text with Attachments")),
++    'desc' => _("Default forwarding method:"),
++    'help' => 'message-forward');
++
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/355forward_bodytext mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/355forward_bodytext
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/355forward_bodytext	1969-12-31 18:00:00.000000000 -0600
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/355forward_bodytext	2008-10-02 23:12:20.000000000 -0500
+@@ -0,0 +1,9 @@
++//355forward_bodytext
++// Should the original message be included?
++$_prefs['forward_bodytext'] = array(
++    'value' => 1,
++    'locked' => false,
++    'shared' => false,
++    'type' => 'checkbox',
++    'desc' => _("Include body text in forward message by default?"));
++    
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/355strip_attachments mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/355strip_attachments
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/355strip_attachments	2008-04-20 14:32:36.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/355strip_attachments	1969-12-31 18:00:00.000000000 -0600
+@@ -1,9 +0,0 @@
+-//355strip_attachments
+-// Should we display an icon to strip attachments?
+-$_prefs['strip_attachments'] = array(
+-    'value' => 0,
+-    'locked' => false,
+-    'shared' => false,
+-    'type' => 'checkbox',
+-    'desc' => _("Show an icon to allow stripping of attachments from messages?"));
+-
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/360delete_spam_after_report mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/360delete_spam_after_report
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/360delete_spam_after_report	2008-06-07 20:41:34.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/360delete_spam_after_report	1969-12-31 18:00:00.000000000 -0600
+@@ -1,17 +0,0 @@
+-//360delete_spam_after_report
+-// What should we do with spam messages after reporting them?
+-$_prefs['delete_spam_after_report'] = array(
+-    'value' => 0,
+-    'locked' => false,
+-    'shared' => false,
+-    'type' => 'enum',
+-    'enum' => array(0 => _("Nothing"),
+-                    1 => _("Delete spam messages")),
+-    'desc' => _("What should we do with spam messages after they have been reported as spam or innocent?"),
+-    'help' => 'prefs-delete_spam_after_report'
+-);
+-if (!$is_pop3) \{
+-    $_prefs['delete_spam_after_report']['enum'][2] =
+-        _("Move spam messages to spam folder and innocent messages to INBOX");
+-\}
+-
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/360reply_headers mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/360reply_headers
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/360reply_headers	1969-12-31 18:00:00.000000000 -0600
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/360reply_headers	2008-10-03 22:45:28.000000000 -0500
+@@ -0,0 +1,10 @@
++//360reply_headers
++// Reply to header summary - leave a brief summary of the header inside
++// the message.
++$_prefs['reply_headers'] = array(
++    'desc' => _("Include a brief summary of the header in a reply?"),
++    'value' => 0,
++    'locked' => false,
++    'shared' => false,
++    'type' => 'checkbox');
++
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/362attrib_text mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/362attrib_text
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/362attrib_text	1969-12-31 18:00:00.000000000 -0600
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/362attrib_text	2008-10-03 22:46:25.000000000 -0500
+@@ -0,0 +1,12 @@
++//362attrib_text
++// How should we attribute quoted lines in a reply
++$_prefs['attrib_text'] = array(
++    'value' => _("Quoting %f:"),
++    'locked' => false,
++    'shared' => false,
++    'type' => 'text',
++    'desc' => _("How to attribute quoted lines in a reply"),
++    'help' => 'prefs-attrib_text');
++
++// End Message Replies/Forwards preferences
++
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/365close_draft mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/365close_draft
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/365close_draft	1969-12-31 18:00:00.000000000 -0600
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/365close_draft	2008-10-03 22:47:32.000000000 -0500
+@@ -0,0 +1,11 @@
++//365close_draft
++// Message Drafts preferences
++
++// closing window after saving a draft?
++$_prefs['close_draft'] = array(
++    'value' => 1,
++    'locked' => false,
++    'shared' => false,
++    'type' => 'checkbox',
++    'desc' => _("Should the compose window be closed after saving a draft?"));
++
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/365html_image_replacement mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/365html_image_replacement
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/365html_image_replacement	2008-04-20 14:33:53.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/365html_image_replacement	1969-12-31 18:00:00.000000000 -0600
+@@ -1,11 +0,0 @@
+-//365html_image_replacement
+-// Replace image tags in HTML messages with blank images?
+-$_prefs['html_image_replacement'] = array(
+-    'value' => 1,
+-    'locked' => false,
+-    'shared' => false,
+-    'type' => 'checkbox',
+-    'desc' => _("Block images in HTML messages unless they are specifically requested?"),
+-    'help' => 'prefs-html_image_replacement'
+-);
+-
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/367unseen_drafts mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/367unseen_drafts
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/367unseen_drafts	1969-12-31 18:00:00.000000000 -0600
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/367unseen_drafts	2008-10-03 22:48:49.000000000 -0500
+@@ -0,0 +1,9 @@
++//367unseen_drafts
++// save drafts as seen or unseen
++$_prefs['unseen_drafts'] = array(
++    'value' => 0,
++    'locked' => false,
++    'shared' => false,
++    'type' => 'checkbox',
++    'desc' => _("Save drafts as unseen?"));
++
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/370auto_save_drafts mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/370auto_save_drafts
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/370auto_save_drafts	1969-12-31 18:00:00.000000000 -0600
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/370auto_save_drafts	2008-10-03 22:51:07.000000000 -0500
+@@ -0,0 +1,15 @@
++//370auto_save_drafts
++// auto-save drafts? value is in minutes, 0 == don't save.
++// Only works w/DIMP - does not show in prefs screen by default
++$_prefs['auto_save_drafts'] = array(
++    'value' => 0,
++    'locked' => false,
++    'shared' => false,
++    'type' => 'enum', 
++    'enum' => array(0 => _("No"),
++                    5 => _("Every 5 minutes")),
++    'desc' => _("Save drafts automatically while composing?"),
++);
++
++// End Message Drafts preferences
++
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/370html_image_addrbook mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/370html_image_addrbook
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/370html_image_addrbook	2008-04-20 14:35:41.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/370html_image_addrbook	1969-12-31 18:00:00.000000000 -0600
+@@ -1,12 +0,0 @@
+-//370html_image_addrbook
+-// By default, automatically show images in HTML messages if the sender is in
+-// the user's addressbook?
+-$_prefs['html_image_addrbook'] = array(
+-    'value' => 1,
+-    'locked' => false,
+-    'shared' => false,
+-    'type' => 'checkbox',
+-    'desc' => _("Automatically show images in HTML messages when the sender is in my address book?"),
+-    'help' => 'prefs-html_image_addrbook'
+-);
+-
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/372filtering mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/372filtering
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/372filtering	1969-12-31 18:00:00.000000000 -0600
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/372filtering	2008-10-03 22:51:47.000000000 -0500
+@@ -0,0 +1,11 @@
++//372filtering
++// Message Viewing preferences
++
++// filter message content?
++$_prefs['filtering'] = array(
++    'value' => 0,
++    'locked' => false,
++    'shared' => false,
++    'type' => 'checkbox',
++    'desc' => _("Filter message content for profanity?"));
++
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/375highlight_text mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/375highlight_text
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/375highlight_text	2008-04-20 14:35:55.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/375highlight_text	1969-12-31 18:00:00.000000000 -0600
+@@ -1,9 +0,0 @@
+-//375highlight_text
+-// should we try to mark different conversations with different colors?
+-$_prefs['highlight_text'] = array(
+-    'value' => 1,
+-    'locked' => false,
+-    'shared' => false,
+-    'type' => 'checkbox',
+-    'desc' => _("Mark different levels of quoting with different colors?"));
+-
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/375strip_attachments mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/375strip_attachments
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/375strip_attachments	1969-12-31 18:00:00.000000000 -0600
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/375strip_attachments	2008-10-03 22:52:29.000000000 -0500
+@@ -0,0 +1,9 @@
++//375strip_attachments
++// Should we display an icon to strip attachments?
++$_prefs['strip_attachments'] = array(
++    'value' => 0,
++    'locked' => false,
++    'shared' => false,
++    'type' => 'checkbox',
++    'desc' => _("Show an icon to allow stripping of attachments from messages?"));
++
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/377delete_spam_after_report mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/377delete_spam_after_report
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/377delete_spam_after_report	1969-12-31 18:00:00.000000000 -0600
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/377delete_spam_after_report	2008-10-03 22:53:03.000000000 -0500
+@@ -0,0 +1,17 @@
++//377delete_spam_after_report
++// What should we do with spam messages after reporting them?
++$_prefs['delete_spam_after_report'] = array(
++    'value' => 0,
++    'locked' => false,
++    'shared' => false,
++    'type' => 'enum',
++    'enum' => array(0 => _("Nothing"),
++                    1 => _("Delete spam messages")),
++    'desc' => _("What should we do with spam messages after they have been reported as spam or innocent?"),
++    'help' => 'prefs-delete_spam_after_report'
++);
++if (!$is_pop3) \{
++    $_prefs['delete_spam_after_report']['enum'][2] =
++        _("Move spam messages to spam folder and innocent messages to INBOX");
++\}
++
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/380highlight_simple_markup mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/380highlight_simple_markup
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/380highlight_simple_markup	2008-04-20 14:36:09.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/380highlight_simple_markup	1969-12-31 18:00:00.000000000 -0600
+@@ -1,9 +0,0 @@
+-//380highlight_simple_markup
+-// should we try to mark simple markup with html tags?
+-$_prefs['highlight_simple_markup'] = array(
+-    'value' => 1,
+-    'locked' => false,
+-    'shared' => false,
+-    'type' => 'checkbox',
+-    'desc' => _("Mark simple markup?"));
+-
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/380html_image_replacement mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/380html_image_replacement
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/380html_image_replacement	1969-12-31 18:00:00.000000000 -0600
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/380html_image_replacement	2008-10-03 22:53:58.000000000 -0500
+@@ -0,0 +1,11 @@
++//380html_image_replacement
++// Replace image tags in HTML messages with blank images?
++$_prefs['html_image_replacement'] = array(
++    'value' => 1,
++    'locked' => false,
++    'shared' => false,
++    'type' => 'checkbox',
++    'desc' => _("Block images in HTML messages unless they are specifically requested?"),
++    'help' => 'prefs-html_image_replacement'
++);
++
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/382html_image_addrbook mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/382html_image_addrbook
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/382html_image_addrbook	1969-12-31 18:00:00.000000000 -0600
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/382html_image_addrbook	2008-10-03 22:54:32.000000000 -0500
+@@ -0,0 +1,12 @@
++//382html_image_addrbook
++// By default, automatically show images in HTML messages if the sender is in
++// the user's addressbook?
++$_prefs['html_image_addrbook'] = array(
++    'value' => 1,
++    'locked' => false,
++    'shared' => false,
++    'type' => 'checkbox',
++    'desc' => _("Automatically show images in HTML messages when the sender is in my address book?"),
++    'help' => 'prefs-html_image_addrbook'
++);
++
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/385highlight_text mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/385highlight_text
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/385highlight_text	1969-12-31 18:00:00.000000000 -0600
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/385highlight_text	2008-10-03 22:56:17.000000000 -0500
+@@ -0,0 +1,9 @@
++//385highlight_text
++// should we try to mark different conversations with different colors?
++$_prefs['highlight_text'] = array(
++    'value' => 1,
++    'locked' => false,
++    'shared' => false,
++    'type' => 'checkbox',
++    'desc' => _("Mark different levels of quoting with different colors?"));
++
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/385show_quoteblocks mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/385show_quoteblocks
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/385show_quoteblocks	2008-04-20 14:36:43.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/385show_quoteblocks	1969-12-31 18:00:00.000000000 -0600
+@@ -1,12 +0,0 @@
+-//385show_quoteblocks
+-// should we show large blocks of quoted text or hide them?
+-$_prefs['show_quoteblocks'] = array(
+-    'value' => 'thread',
+-    'locked' => false,
+-    'shared' => false,
+-    'type' => 'enum',
+-    'enum' => array('shown' => _("Shown"),
+-                    'thread' => _("Hidden in Thread View"),
+-                    'hidden' => _("Hidden")),
+-    'desc' => _("Should large blocks of quoted text be shown or hidden by default? It can be toggled easily whichever you choose."));
+-
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/387highlight_simple_markup mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/387highlight_simple_markup
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/387highlight_simple_markup	1969-12-31 18:00:00.000000000 -0600
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/387highlight_simple_markup	2008-10-03 22:56:47.000000000 -0500
+@@ -0,0 +1,9 @@
++//387highlight_simple_markup
++// should we try to mark simple markup with html tags?
++$_prefs['highlight_simple_markup'] = array(
++    'value' => 1,
++    'locked' => false,
++    'shared' => false,
++    'type' => 'checkbox',
++    'desc' => _("Mark simple markup?"));
++
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/390dim_signature mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/390dim_signature
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/390dim_signature	2008-04-20 14:37:07.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/390dim_signature	1969-12-31 18:00:00.000000000 -0600
+@@ -1,9 +0,0 @@
+-//390dim_signature
+-// should we dim signatures?
+-$_prefs['dim_signature'] = array(
+-    'value' => 1,
+-    'locked' => false,
+-    'shared' => false,
+-    'type' => 'checkbox',
+-    'desc' => _("Dim signatures?"));
+-
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/390show_quoteblocks mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/390show_quoteblocks
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/390show_quoteblocks	1969-12-31 18:00:00.000000000 -0600
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/390show_quoteblocks	2008-10-03 23:01:05.000000000 -0500
+@@ -0,0 +1,14 @@
++//390show_quoteblocks
++// should we show large blocks of quoted text or hide them?
++$_prefs['show_quoteblocks'] = array(
++    'value' => 'thread',
++    'locked' => false,
++    'shared' => false,
++    'type' => 'enum',
++    'enum' => array('shown' => _("Shown"),
++                    'thread' => _("Hidden in Thread View"),
++                    'list' => _("Hidden in List Messages"),
++                    'listthread' => _("Hidden in Thread View and List Messages"),
++                    'hidden' => _("Hidden")),
++    'desc' => _("Should large blocks of quoted text be shown or hidden by default? It can be toggled easily whichever you choose."));
++
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/392dim_signature mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/392dim_signature
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/392dim_signature	1969-12-31 18:00:00.000000000 -0600
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/392dim_signature	2008-10-03 23:01:38.000000000 -0500
+@@ -0,0 +1,9 @@
++//392dim_signature
++// should we dim signatures?
++$_prefs['dim_signature'] = array(
++    'value' => 1,
++    'locked' => false,
++    'shared' => false,
++    'type' => 'checkbox',
++    'desc' => _("Dim signatures?"));
++
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/415use_vtrash mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/415use_vtrash
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/415use_vtrash	2008-04-20 14:42:39.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/415use_vtrash	2008-10-03 23:04:20.000000000 -0500
+@@ -4,6 +4,5 @@
+     'value' => 0,
+     'locked' => false,
+     'shared' => false,
+-    'type' => 'checkbox',
+-    'desc' => _("Use Virtual Trash Folder?"));
++    'type' => 'implicit');
+ 
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/560save_recipients mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/560save_recipients
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/560save_recipients	2008-04-20 15:16:37.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/560save_recipients	2008-10-04 11:25:07.000000000 -0500
+@@ -1,4 +1,6 @@
+ //560save_recipients
++// Address book preferences
++
+ // Should recipients of outgoing messages be added automatically to
+ // the address book?
+ $_prefs['save_recipients'] = array(
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/602pgp_verify mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/602pgp_verify
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/602pgp_verify	2008-04-20 15:21:13.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/prefs.php/602pgp_verify	2008-10-04 11:27:54.000000000 -0500
+@@ -1,5 +1,5 @@
+ //602pgp_verify
+- $_prefs['pgp_verify'] = array(
++$_prefs['pgp_verify'] = array(
+     'value' => 1,
+     'locked' => false,
+     'shared' => false,
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/servers.php/00Header mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/servers.php/00Header
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/servers.php/00Header	2008-04-19 19:23:00.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/servers.php/00Header	2008-10-01 19:32:35.000000000 -0500
+@@ -1,5 +1,5 @@
+ //00Header
+ /**
+- * $Horde: imp/config/servers.php.dist,v 1.50.2.20 2008/02/29 21:25:28 chuck Exp $
++ * $Horde: imp/config/servers.php.dist,v 1.50.2.23 2008/07/03 13:06:15 jan Exp $
+  */
+ 
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/servers.php/120IMAPServers mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/servers.php/120IMAPServers
+--- e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/servers.php/120IMAPServers	2008-04-19 20:17:59.000000000 -0500
++++ mezzanine_patched_e-smith-imp-4.2/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/servers.php/120IMAPServers	2008-10-01 21:10:14.000000000 -0500
+@@ -11,8 +11,18 @@
+         $OUT .= "    'name' => 'IMAP Server',\n";
+         $OUT .= "    'server' => 'localhost',\n";
+         $OUT .= "    'hordeauth' => false,\n";
+-        $OUT .= "    'protocol' => 'imap/notls',\n";
+-        $OUT .= "    'port' => '143',\n";
++
++        if ($imaps{access} eq 'public')
++        {
++            $OUT .= "    'protocol' => 'imap/ssl/novalidate-cert',\n";
++            $OUT .= "    'port' => '$imaps{TCPPort}',\n";
++        }
++        else
++        {
++            $OUT .= "    'protocol' => 'imap/notls',\n";
++            $OUT .= "    'port' => '$imap{TCPPort}',\n";
++
++        }
+         $OUT .= "    'maildomain' => '$domain',\n";
+         $OUT .= "    'smtphost' => 'localhost',\n";
+         $OUT .= "    'smtpport' => '$smtpd{TCPPort}',\n";
