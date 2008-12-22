@@ -1,4 +1,4 @@
-# $Id: e-smith-imp.spec,v 1.6 2008/12/06 21:30:32 mrjhb3 Exp $
+# $Id: e-smith-imp.spec,v 1.7 2008/12/22 00:45:03 mrjhb3 Exp $
 
 Summary: e-smith specific IMP configuration and templates.
 %define name e-smith-imp
@@ -21,12 +21,16 @@ Requires: e-smith-ingo
 Requires: php
 Requires: php-ldap
 Requires: php-mysql
+Requires: php-pear-HTTP-Request
 BuildRequires: e-smith-devtools >= 1.13.1-03
 AutoReqProv: no
 Obsoletes: dcb-e-smith-imp
 Obsoletes: smeserver-imp-menuarray
 
 %changelog
+* Sun Dec 21 2008 John H. Bennett III <bennettj@johnbennettservices.com> 5.0.0-3
+- Updated spec file to require php-pear-HTTP-Request to accomodate HTML composition [SME: 4821]
+
 * Sat Dec 06 2008 John H. Bennett III <bennettj@johnbennettservices.com> 5.0.0-2       
 - Updated templates to reflect changes in imp 4.3 [SME: 4832]
 
