@@ -1,10 +1,10 @@
-# $Id: e-smith-imp.spec,v 1.7 2008/12/22 00:45:03 mrjhb3 Exp $
+# $Id: e-smith-imp.spec,v 1.8 2008/12/28 20:22:55 bytegw Exp $
 
 Summary: e-smith specific IMP configuration and templates.
 %define name e-smith-imp
 Name: %{name}
 %define version 5.0.0
-%define release 3
+%define release 4
 Version: %{version}
 Release: %{release}%{?dist}
 License: GPL
@@ -28,6 +28,9 @@ Obsoletes: dcb-e-smith-imp
 Obsoletes: smeserver-imp-menuarray
 
 %changelog
+* Sun Dec 28 2008 Gavin Weight <gweight@gmail.com> 5.0.0-4
+- Bump version to accept previous requires entry. [SME: 4821]
+
 * Sun Dec 21 2008 John H. Bennett III <bennettj@johnbennettservices.com> 5.0.0-3
 - Updated spec file to require php-pear-HTTP-Request to accomodate HTML composition [SME: 4821]
 
