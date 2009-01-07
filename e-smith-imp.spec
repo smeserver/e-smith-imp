@@ -1,10 +1,10 @@
-# $Id: e-smith-imp.spec,v 1.7 2008/12/24 23:01:06 mrjhb3 Exp $
+# $Id: e-smith-imp.spec,v 1.8 2009/01/07 18:14:51 bytegw Exp $
 
 Summary: e-smith specific IMP configuration and templates.
 %define name e-smith-imp
 Name: %{name}
 %define version 5.2.0
-%define release 3
+%define release 4
 Version: %{version}
 Release: %{release}%{?dist}
 License: GPL
@@ -25,10 +25,13 @@ BuildRequires: e-smith-devtools >= 1.13.1-03
 AutoReqProv: no
 Obsoletes: dcb-e-smith-imp
 Obsoletes: smeserver-imp-menuarray
-Obsoletes: php-pear-HTTP-Request
-Requires: php-pear(HTTP-Request)
+Requires: php-pear(HTTP_Request)
 
 %changelog
+* Wed Jan 07 2009 Gavin Weight <gweight@gmail.com> 5.2.0-4
+- Updated spec file to require php-pear(HTTP_Request) and remove obsolete
+  php-pear-HTTP-Request line. [SME: 4928]
+
 * Wed Dec 24 2008 John H. Bennett III <bennettj@johnbennettservices.com> 5.2.0-3
 - Updated spec file to require php-pear-HTTP-Request to accomodate HTML composition [SME: 4821]
 
