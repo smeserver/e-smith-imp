@@ -1,19 +1,20 @@
-# $Id: e-smith-imp.spec,v 1.8 2009/01/07 18:14:51 bytegw Exp $
+# $Id: e-smith-imp.spec,v 1.9 2009/06/22 01:44:47 mrjhb3 Exp $
 
 Summary: e-smith specific IMP configuration and templates.
 %define name e-smith-imp
 Name: %{name}
 %define version 5.2.0
-%define release 4
+%define release 5
 Version: %{version}
 Release: %{release}%{?dist}
 License: GPL
 Group: Networking/Daemons
 Source: %{name}-%{version}.tar.gz
 Patch1: e-smith-imp_imp-4.3.patch
+Patch2: e-smith-imp_imp-4.3.4.patch
 BuildRoot: /var/tmp/%{name}-%{version}-%{release}-buildroot
 BuildArchitectures: noarch
-Requires: imp-h3 >= 4.2
+Requires: imp-h3 >= 4.3
 Requires: e-smith-base >= 4.15.1
 Requires: e-smith-apache >= 1.1.0-18
 Requires: e-smith-lib >= 1.15.1-16
@@ -28,6 +29,9 @@ Obsoletes: smeserver-imp-menuarray
 Requires: php-pear(HTTP_Request)
 
 %changelog
+* Sat Jun 20 2009 John H. Bennett III <bennettj@johnbennettservices.com> 5.2.0-5
+- Updated templates to reflect changes in imp 4.3.4 [SME: 5371]
+
 * Wed Jan 07 2009 Gavin Weight <gweight@gmail.com> 5.2.0-4
 - Updated spec file to require php-pear(HTTP_Request) and remove obsolete
   php-pear-HTTP-Request line. [SME: 4928]
@@ -53,6 +57,7 @@ so that IMP will work properly on SME Server
 %setup
 
 %patch1 -p1
+%patch2 -p1
 
 %build
 mkdir -p root/home/httpd/html/horde/imp/SSLonly
