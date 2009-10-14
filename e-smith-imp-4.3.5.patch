@@ -1,0 +1,8 @@
+diff -Nur -x '*.orig' -x '*.rej' e-smith-imp-5.0.0/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/conf.php/00header mezzanine_patched_e-smith-imp-5.0.0/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/conf.php/00header
+--- e-smith-imp-5.0.0/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/conf.php/00header	2009-10-02 21:58:59.000000000 -0500
++++ mezzanine_patched_e-smith-imp-5.0.0/root/etc/e-smith/templates/home/httpd/html/horde/imp/config/conf.php/00header	2009-10-02 00:09:44.000000000 -0500
+@@ -1,3 +1,3 @@
+ // 00header
+ /* CONFIG START. DO NOT CHANGE ANYTHING IN OR AFTER THIS LINE. */
+-// $Horde: imp/config/conf.xml,v 1.53.2.40 2009/02/05 21:05:39 slusarz Exp $
++// $Horde: imp/config/conf.xml,v 1.53.2.43 2009/07/02 06:18:15 slusarz Exp $
