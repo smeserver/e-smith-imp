@@ -1,10 +1,10 @@
-# $Id: e-smith-imp.spec,v 1.12 2010/02/15 04:52:27 mrjhb3 Exp $
+# $Id: e-smith-imp.spec,v 1.13 2010/05/11 04:22:09 mrjhb3 Exp $
 
 Summary: e-smith specific IMP configuration and templates.
 %define name e-smith-imp
 Name: %{name}
 %define version 5.2.0
-%define release 8
+%define release 9
 Version: %{version}
 Release: %{release}%{?dist}
 License: GPL
@@ -15,6 +15,7 @@ Patch2: e-smith-imp_imp-4.3.4.patch
 Patch3: e-smith-imp-4.3.5.patch
 Patch4: e-smith-imp-4.3.6.patch
 Patch5: e-smith-imp_mime_drivers.php.patch
+Patch6: e-smith-imp-4.3.7.patch
 BuildRoot: /var/tmp/%{name}-%{version}-%{release}-buildroot
 BuildArchitectures: noarch
 Requires: imp-h3 >= 4.3
@@ -32,6 +33,9 @@ Obsoletes: smeserver-imp-menuarray
 Requires: php-pear(HTTP_Request)
 
 %changelog
+* Mon May 10 2010 John H. Bennett III <bennettj@johnbennettservices.com> 5.2.0-9
+- Updated templates to reflect changes in imp 4.3.7 [SME: 5938]
+
 * Sun Feb 14 2010 John H. Bennett III <bennettj@johnbennettservices.com> 5.2.0-8
 - Patch to template imp's mime_drivers.php file so some settings can be customized [SME: 5224]
 - config setprop horde Limitinlinesize  <--default is 1048576
@@ -77,6 +81,7 @@ so that IMP will work properly on SME Server
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 
 %build
 mkdir -p root/home/httpd/html/horde/imp/SSLonly
